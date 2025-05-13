@@ -1,0 +1,70 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+@model IEnumerable<Cart>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td class="text-left">@T["ProductImage"]</td>
+            <td class="text-left">@T["productName"]</td>
+            <td class="text-right">@T["Quantity"]</td>
+            <td class="text-right">@T["UnitPrice"]</td>
+            <td class="text-right">@T["Total"]</td>
+        </tr>
+    </thead>
+    @*<tbody id="cartTableBody">
+            @{decimal Totalcart = 0; }
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class="text-center"><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.ProductId"><img hight="70px" width="70px" src="@Url.Content(item.Product.FirstImgUrl)" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-thumbnail" /></a></td>
+                <td class="text-left">
+                    <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.ProductId">@item.Product.NameE</a><br />
+                </td>
+                <td class="text-left" width="200px">
+                    <div class="input-group btn-block quantity">
+                        @{string QuyId = "txtQuantity" + item.Id;}
+                        <input id=@QuyId type="text" name="quantity" value="@item.Quantity" onkeyup="UpdateCartQuantity(@item.Id)" size="1" class="form-control" />
+                        <span class="input-group-btn">
+                          comment  <button data-toggle="tooltip" title="Update" class="btn btn-primary" onclick="UpdateCartQuantity(@item.Id)"><i class="fa fa-clone"></i></button>
+                            <button type="button" data-toggle="tooltip" title="Remove" class="btn btn-danger" onClick="DeleteCartItem(@item.Id)"><i class="fa fa-times-circle"></i></button>
+                        </span>
+                    </div>
+                </td>
+                @if (item.Product.Offer > 0)
+                {
+                    <td class="text-right">
+                        <div class="price"> <span class="price-new">@item.Product.Offer LE</span> <span class="price-old">@item.Product.Price LE</span></div>
+                    </td>
+                }
+                else
+                {
+                    <td class="text-right">
+                        <div class="price"> <span class="price-new" itemprop="price">@(item.Product.Price) L.E</span></div>
+                    </td>
+                }
+                <td class="text-right">@(item.TotalPrice) LE</td>
+            </tr>
+                Totalcart += item.TotalPrice;
+            }
+
+        </tbody>*@
+
+
+    <tbody id="cartTableBody">
+        @* Rendered by JS function (addTable) *@
+    </tbody>
+
+
+    <tfoot>
+        <tr>
+            <td class="lg-visible" colspan="3"></td>
+            <td class="text-right">
+                <strong>@T["Sub-Total"]</strong>
+            </td>
+            <td id="subTotaltd" class="text-right"> @T["EGP"]</td>
+        </tr>
+
+    </tfoot>
+</table>
+

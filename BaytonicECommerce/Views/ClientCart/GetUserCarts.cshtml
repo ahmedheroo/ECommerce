@@ -1,0 +1,89 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+@model IEnumerable<Cart>
+@{
+    ViewData["Title"] = "GetUserCarts";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div id="wrapper" class="wrapper-fluid banners-effect-5 marg-b-5">
+
+
+
+
+    <!-- Main Container  -->
+    <div class="main-container container">
+        <ul class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">@T["ShoppingCart"]</a></li>
+        </ul>
+
+        <div class="row">
+            <div id="content" class="col-sm-12">
+                <!--Middle Part Start-->
+                <div id="isCart" class="col-sm-12 " style="display:none">
+                    <h2 class="title">@T["ShoppingCart"]</h2>
+                    <div id="cartTableDv" class="table-responsive form-group">
+                        <partial name="_GetUserCartDetails" model="@Model" />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-offset-8">
+                            <table class="table table-bordered">
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <div class="row">
+                            <div class="pull-left col-sm-6 continue-btn"><a asp-action="Index" asp-controller="Home" class="btn btn-primary btn-yellow">@T["ContinueShopping"]</a></div>
+                            <div class="pull-right col-sm-6 text-right"><a asp-action="GetUserCartWithShips" asp-controller="ClientCart" class="btn btn-yellow btn-primary">@T["Checkout"]</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="noCart" class="col-sm-12 text-center">
+                    <img src="~/ClientTemplet/image/BaytonicImgs/cart-icon-28356.png" />
+                    <h3>@T["Sorry,ThereIsNoThingInYourCartYouCan"] <a asp-action="Index" asp-controller="Home">@T["ShoppingNow"]</a>  </h3>
+                </div>
+            </div>
+            <!--Middle Part End -->
+        </div>
+    </div>
+    <!-- //Main Container -->
+    @section Scripts{
+        <script>
+            window.onload = function () {
+                let cart = [];
+                if (localStorage.getItem('cart')) {
+                    cart = JSON.parse(localStorage.getItem('cart'));
+                    var cartnumber = document.getElementById("cartnumber");
+                    cartnumber.innerText = cart.length;
+
+                    addTable();
+                }
+            };
+
+         @*function UpdateCartQuantity(cartId) {
+            var quantity = document.getElementById("txtQuantity"+cartId).value;
+            if (cartId && cartId != '' && Number(quantity)) {
+                $.ajax({
+                    url: '@Url.Action("UpdateCartQuantity", "ClientCart")',
+                    type: 'POST',
+                    cache: false,
+                    data: { cartId: cartId, NewQuantity: quantity }
+                }).done(function (result) {
+                    $('#cartTableDv').html(result);
+                });
+            }
+            }*@
+            /////local storage
+
+            //////
+
+        </script>
+    }
+
+
+
+</div>

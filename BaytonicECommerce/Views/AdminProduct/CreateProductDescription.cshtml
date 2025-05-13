@@ -1,0 +1,60 @@
+﻿@model ProductDescription
+@{
+    ViewData["Title"] = "Create Product Description";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h5 style="color:gray">Product Descriptions</h5>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="SysArticle">Articles</a></li>
+                        <li class="breadcrumb-item active">Add New Description</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-info" style="margin:10px">
+        <div class="card-header">
+            <h3 class="card-title">New Paragraph</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal"  asp-controller="AdminProduct" method="post" asp-action="CreateProductDescription">
+            <div class="card-body">
+                <input type="hidden" asp-for="ProductId" />
+                <div class="form-group row">
+                    <label asp-for="DescriptionE" class="col-sm-2 col-form-label">English Description</label>
+                    <div class="col-sm-10">
+                        <textarea asp-for="DescriptionE" class="form-control" placeholder=" Write English Description" required></textarea>
+                    </div>
+                    <span asp-validation-for="DescriptionE" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="DescriptionA" class="col-sm-2 col-form-label">Arabic Description</label>
+                    <div class="col-sm-10">
+                        <textarea asp-for="DescriptionA" class="form-control" placeholder="Write Arabic Description" required></textarea>
+                    </div>
+                    <span asp-validation-for="DescriptionA" class="text-danger"></span>
+                </div>
+
+            </div>
+
+
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-info"> <i class="far fa-save mr-1"></i> Save</button>
+                <a asp-action="Edit" asp-controller="AdminProduct" asp-route-id="@Model.ProductId" class="btn btn-default float-right">finish</a>
+            </div>
+
+            <!-- /.card-footer -->
+        </form>
+    </div>
+</div>
+

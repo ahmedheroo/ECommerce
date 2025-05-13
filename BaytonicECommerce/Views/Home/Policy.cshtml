@@ -1,0 +1,173 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+<!-- Mirrored from demo.smartaddons.com/templates/html/emarket/quickview.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Sep 2021 16:36:52 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+
+    <!-- Basic page needs
+    ============================================ -->
+    <title>BytoninC - The Best for Your Home</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="html5 template, best html5 template, best html template, html5 basic template, multipurpose html5 template, multipurpose html template, creative html templates, creative html5 templates" />
+    <meta name="description" content="eMarket is a powerful Multi-purpose HTML5 Template with clean and user friendly design. It is definite a great starter for any eCommerce web project." />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+    @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+    {
+        <link href="~/ClientTemplet/css/rtl.css" rel="stylesheet" />
+    }
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Favicon
+    ============================================ -->
+
+    <link rel="shortcut icon" type="image/png" href="ico/favicon-16x16.png" />
+
+
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="~/ClientTemplet/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/ClientTemplet/css/custom.css">
+    <link href="~/ClientTemplet/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="~/ClientTemplet/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="~/ClientTemplet/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/lib.css" rel="stylesheet">
+    <link href="~/ClientTemplet/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="~/ClientTemplet/js/minicolors/miniColors.css" rel="stylesheet">
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="~/ClientTemplet/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so-newletter-popup.css" rel="stylesheet">
+
+    <link href="~/ClientTemplet/css/footer/footer1.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="~/ClientTemplet/css/theme.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/responsive.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/custom.css" rel="stylesheet" />
+
+    <!-- Google web fonts
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body {
+            font-family: 'Roboto', sans-serif
+        }
+    </style>
+
+</head>
+
+<body class="res layout-subpage">
+    <div id="wrapper" class="wrapper-full ">
+        <!-- Main Container  -->
+        <div class="main-container container">
+
+            <div class="row">
+                <!--Middle Part Start-->
+                <div id="content" class="col-md-12 col-sm-12">
+
+
+                    <br>
+                    <br>
+                    <h3 style="text-align: right;direction: ltr;">@T["BaytonicPolicy"]</h3>
+
+                    <ul class="policy-list">
+                        <li class="disc-list">@T["Policyline1"]</li>
+                        <li class="disc-list">@T["Policyline2"] : <a class="incon" href="mailto:Hello@Baytonic.com"><span>Hello@Baytonic.com</span></a></li>
+                        <li class="disc-list">@T["Policyline3"]</li>
+                        <li class="disc-list">@T["Policyline4"]</li>
+                        <li class="disc-list">@T["Policyline5"]</li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+            <!--Middle Part End-->
+        </div>
+        <!-- //Main Container -->
+
+        <style type="text/css">
+            #wrapper {
+                box-shadow: none;
+            }
+
+                #wrapper > *:not(.main-container) {
+                    display: none;
+                }
+
+            #content {
+                margin: 0
+            }
+
+            .container {
+                width: 100%;
+            }
+
+            .product-info .product-view, .left-content-product, .box-info-product {
+                margin: 0;
+            }
+
+                .left-content-product .content-product-right .box-info-product .cart input {
+                    padding: 12px 16px;
+                }
+
+                .left-content-product .content-product-right .box-info-product .add-to-links {
+                    width: auto;
+                    float: none;
+                    margin-top: 0px;
+                    clear: none;
+                }
+
+            .add-to-links ul li {
+                margin: 0;
+            }
+        </style>
+    </div>
+
+    <!-- Include Libs & Plugins
+    ============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="~/ClientTemplet/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/libs.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/unveil/jquery.unveil.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/datetimepicker/moment.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/modernizr/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/minicolors/jquery.miniColors.min.js"></script>
+
+    <!-- Theme files
+    ============================================ -->
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/homepage.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/toppanel.js"></script>
+
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/so_megamenu.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/addtocart.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/application.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/ClientTemplet/js/cartLocalStaorage.js"></script>
+
+</body>
+
+
+<!-- Mirrored from demo.smartaddons.com/templates/html/emarket/quickview.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Sep 2021 16:36:52 GMT -->
+</html>

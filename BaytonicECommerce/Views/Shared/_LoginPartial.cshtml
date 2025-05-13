@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject RoleManager<IdentityRole> Roles
+
+@if (SignInManager.IsSignedIn(User))
+{
+        var user = await UserManager.GetUserAsync(User);
+        IList<string> roles = await UserManager.GetRolesAsync(user);
+    
+        @if (roles[0] == "User")
+        {
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Context.Request.Path@Context.Request.QueryString" method="post" id="logoutForm" class="navbar-right">
+                <ul class="dropdown-menu text-center" style="left :auto!important ;right:auto !important">
+                    <li class="text-center">
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @UserManager.GetUserName(User)</a> 
+                    </li>
+                    <li class="wishlist text-center">
+                        <a asp-action="GetUserWishList" asp-controller="ClientWishList" asp-route-UserId="1" id="wishlist-total" class="top-link-wishlist" title="Wish List (0) "><!-- <i class="fa fa-heart"></i> --> Wish List (0) </a>
+                    </li>
+                    <li class="checkout text-center">
+                        <a asp-action="GetUserOrders" asp-controller="ClientOrder" asp-route-UserId="1" class="btn-link" title="Checkout ">@*<i class="fa fa-check-square-o"></i>*@My Orders </a>
+                    </li>
+                    <li class="text-center">
+                        @*<a asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-lock"></i>LogOut</a>*@
+                        <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                    </li>
+                </ul>
+            </form>
+        }
+        else
+        {
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Context.Request.Path@Context.Request.QueryString" method="post" id="logoutForm" class="navbar-right">
+                <ul class="dropdown-menu text-center" style="left :auto!important ;right:auto !important">
+                    <li class="text-center">
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @UserManager.GetUserName(User)!</a>
+                    </li>
+                    <li class="wishlist text-center">
+                        <a asp-controller="AdminProduct" asp-action="Index" class="top-link-wishlist" title="Admin Dashboard "><!-- <i class="fa fa-heart"></i> --> Admin Page </a>
+                    </li>
+                    <li class="text-center">
+                        @*<a asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-lock"></i>LogOut</a>*@
+                        <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                    </li>
+                </ul>
+            </form>
+        }
+
+    }
+else
+{
+    <ul class="dropdown-menu">
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">@T["Login"]</a>
+
+        </li>
+    </ul>
+}

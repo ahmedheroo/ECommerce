@@ -1,0 +1,173 @@
+﻿@model Product_Descriptions_CategoriesVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h5 style="color:gray">Products</h5>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="AdminProduct">Products</a></li>
+                        <li class="breadcrumb-item active">Add New Product</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-info" style="margin:10px">
+        <div class="card-header">
+            <h3 class="card-title">New Product</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal" enctype="multipart/form-data" asp-controller="AdminProduct" method="post" asp-action="Create">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label asp-for="product.NameE" class="col-sm-2 col-form-label">English Name</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.NameE" class="form-control" placeholder="Product English Name" required>
+                    </div>
+                    <span asp-validation-for="product.NameE" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.NameA" class="col-sm-2 col-form-label">Arabic Name</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.NameA" class="form-control" placeholder="Product Arabic Name" required>
+                    </div>
+                    <span asp-validation-for="product.NameA" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.Price" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.Price" class="form-control" placeholder="Price" required>
+                    </div>
+                    <span asp-validation-for="product.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(x => Model.product.Category, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(x => Model.product.CategoryId, new SelectList(Model.Categories, "Id", "NameE"), htmlAttributes: new { @class = "form-control", id = "CategoryId" })
+                    </div>
+                    <span asp-validation-for="product.CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.Amount" class="col-sm-2 col-form-label">Amount</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.Amount" class="form-control" placeholder="Product Amount" required>
+                    </div>
+                    <span asp-validation-for="product.Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.HintE" class="col-sm-2 col-form-label">English Hint</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.HintE" class="form-control" placeholder=" Product Arabic Hint" required />
+
+                    </div>
+                    <span asp-validation-for="product.HintE" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.HintA" class="col-sm-2 col-form-label">Arabic Hint</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.HintA" class="form-control" placeholder=" Product Arabic Hint" required />
+
+                    </div>
+                    <span asp-validation-for="product.HintA" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.LimettedItem" class="col-sm-2 col-form-label">Limetted Item Text</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.LimettedItem" class="form-control" placeholder="Limetted Item Text" />
+
+                    </div>
+                    <span asp-validation-for="product.LimettedItem" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.Queue" class="col-sm-2 col-form-label">Product Queue</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.Queue" class="form-control" placeholder="Product Queue" required />
+
+                    </div>
+                    <span asp-validation-for="product.Queue" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.TagE" class="col-sm-2 col-form-label">English Tags</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.TagE" class="form-control" placeholder="Tag1, Tag2, ....." required />
+
+                    </div>
+                    <span asp-validation-for="product.TagE" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.TagA" class="col-sm-2 col-form-label">Arabic Tags</label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.TagA" class="form-control" placeholder="Tag1, Tag2, ....." required />
+
+                    </div>
+                    <span asp-validation-for="product.TagA" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+
+                    <label asp-for="formFiles" class="col-sm-2">Product Images</label>
+
+                    <div class="col-sm-10">
+                        <div class="custom-file">
+                            <input multiple asp-for="@Model.formFiles" class="custom-file-input" id="customFile" accept="image/x-png,image/gif,image/jpeg,image/jpg" />
+                            <label class="custom-file-label">Choose Product Images</label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="custom-control custom-checkbox">
+                        <input asp-for="product.IsTopSeller" class="custom-control-input" type="checkbox" style="margin-right:10px">
+                        <label asp-for="product.IsTopSeller" class="custom-control-label">Top Seller</label>
+                        <span asp-validation-for="product.IsTopSeller" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="custom-control custom-checkbox">
+                        <input asp-for="product.IsActive" class="custom-control-input" type="checkbox" style="margin-right:10px">
+                        <label asp-for="product.IsActive" class="custom-control-label">Active</label>
+                        <span asp-validation-for="product.IsActive" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+         
+
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-info"> <i class="far fa-save mr-1"></i> Save</button>
+                <a asp-action="Index" asp-controller="AdminProduct" class="btn btn-default float-right">Cancel</a>
+            </div>
+
+            <!-- /.card-footer -->
+        </form>
+    </div>
+</div>
+@section Scripts{ 
+<script>
+    $(document).ready(function () {
+        $('.custom-file-input').on("change", function () {
+            var filelable = $(this).next('.custom-file-label');
+            var files = $(this)[0].files;
+            if (files.length > 1) {
+                filelable.html(files.length + 'Files selected');
+
+            }
+            else if (files.length == 1) {
+                filelable.html(files[0].name);
+            }
+        });
+    });
+</script>
+}
+

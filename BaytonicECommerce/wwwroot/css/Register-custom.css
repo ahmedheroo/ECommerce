@@ -1,0 +1,65 @@
+.bg-image{
+    transform: scale(0.85);
+}
+ .flex-Contain
+ {
+     display: flex;
+     flex-wrap: wrap;
+     flex-direction: row;
+     
+ }
+  .removeborders{
+      border-top: none;
+      border-left: none;
+      border-right: none;
+  }
+  .regcontainer{
+      display: flexbox;
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
+ 
+.field {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 0.1em;
+  }
+  
+  .reglabel, .reginput {
+    transition: all 0.2s;
+    touch-action: manipulation;
+  }
+  .reglabel{
+      font-size: 0.7em;
+      color: rgb(139, 138, 138);
+  }
+  .reginput:focus ~ .reglabel {  color:rgb(7, 101, 243);font-size: 0.9em; }
+  
+     
+  
+  .reginput:focus {
+    outline: 0;
+    border-bottom: 3px solid rgb(7, 101, 243);
+  }
+ 
+  .reginput:placeholder-shown + .reglabel {
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(0, 2.125rem) scale(1.5);
+  }
+ 
+  ::-webkit-input-placeholder {
+    opacity: 0;
+    transition: inherit;
+  }
+ 
+  .reginput:not(:placeholder-shown) + .reglabel,
+  .reginput:focus + .reglabel {
+    transform: translate(0, 0) scale(1);
+    cursor: pointer;
+  }
+ 

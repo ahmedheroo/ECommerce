@@ -1,0 +1,181 @@
+﻿@*@page
+    @model RegisterModel
+    @{
+        ViewData["Title"] = "Register";
+    }
+
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-default">Register</button>
+            </form>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Use another service to register.</h4>
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <div>
+                            <p>
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                }
+            </section>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }*@
+@page
+@model RegisterModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="~/css/Register-custom.css" rel="stylesheet" />
+    <title>Title</title>
+</head>
+<body>
+    <!-- <div class="fluid-container align-items-center" style="height: 70px; display: flex;flex-direction: row;background-color:rgb(242, 243, 247); ; ">
+        <img src="image/endTag logo.png" width="15%" alt="Logo" style="margin-left: 200px">
+    </div> -->
+
+    <section class="bg-image">
+        <div class="mask d-flex align-items-center  ">
+            <div class="container ">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card " style="border-radius: 15px; box-shadow:  0 0 5px #fff, 0 0 5px #fff, 0 0 5px #888888, 0 0 6px #888888, 0 0 10px #888888;">
+                            <div class="card-body p-4">
+                                <h3 class="text-uppercase text-center mt-2 mb-3" style="color: rgb(14, 51, 109);">Create an account</h3>
+
+                                <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class=" justify-content-center align-items-center">
+
+                                    @*<div class="form-outline mb-2 field">
+            <input type="text" id="Fname" class="form-control form-control-lg removeborders shadow-none reginput" placeholder=" " required />
+            <label class="form-label reglabel" for="Fname">First Name</label>
+        </div>
+        <div class="form-outline mb-2 field">
+            <input type="text" id="Lname" class="form-control form-control-lg removeborders shadow-none reginput" placeholder=" " required />
+            <label class="form-label reglabel" for="Lname">Last Name</label>
+        </div>
+
+        <div class="form-outline mb-2 field">
+            <span>
+                <label class="form-label reglabel">Code : </label>
+                <label class="form-label reglabel">+20</label>
+            </span>
+            <input type="text" id="phonenumber" class="form-control form-control-lg removeborders shadow-none reginput" placeholder=" " required />
+            <label class="form-label reglabel" for="phonenumber">Phone Number</label>
+        </div>*@
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-outline mb-2 field">
+                                        <input asp-for="Input.UserName" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                                        <label asp-for="Input.UserName" class="form-label reglabel">Name</label>
+                                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-outline mb-2 field">
+                                        <input asp-for="Input.Email" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                                        <label asp-for="Input.Email" class="form-label reglabel">Email</label>
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-outline mb-2 field">
+                                        <input asp-for="Input.PhoneNumber" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                                        <label asp-for="Input.PhoneNumber" class="form-label reglabel">Phone</label>
+                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-outline mb-2 field">
+                                        <input asp-for="Input.Password" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                                        <label asp-for="Input.Password" class="form-label reglabel">Password</label>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                                    </div>
+
+                                    <div class="form-outline mb-5 field">
+                                        <input asp-for="Input.ConfirmPassword" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                                        <label asp-for="Input.ConfirmPassword" class="form-label reglabel">Repeat your password</label>
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+
+                                    </div>
+
+                                    @*<div class="form-check d-flex mb-2">
+            <input class="form-check-input me-2" type="checkbox" value="" id="checkaccept" />
+            <label class="form-check-label" for="checkaccept">
+                I agree all Terms and conditions
+            </label>
+        </div>*@
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary btn-block btn-lg text-body" style="color: white !important; width: 250px;">Register</button>
+                                    </div>
+
+                                    <p class="text-center text-muted mt-3 mb-0">Already have an account? <a asp-area="Identity" asp-page="/Account/Login" class="fw-bold text-body"><u>Login here</u></a></p>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
+    </section>
+
+    <!-- <div class="fluid-container" style="height: 70px;background-color:rgb(14, 51, 109);color: white;align-content: center;">
+     <div > All Rights © Reserved to <a style="color: dodgerblue;" href="http://www.techno-gate-eg.com/" target="_blank"><strong>Techno Gate CO. </strong></a><span>for software developments</span>
+     </div> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>

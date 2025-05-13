@@ -1,0 +1,477 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+
+@{
+    ViewData["Title"] = "GetProductsByCategoryID";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+@model IEnumerable<Product>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="main-container container">
+    <ul class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i></a></li>
+        <!-- Cat. Na -->
+        <li><a href="#">@T["Offers"]</a></li>
+
+    </ul>
+
+    <div class="row">
+
+        <!--Middle Part Start-->
+        <div id="content" class="col-md-12 col-sm-12">
+            <div class="products-category">
+                <h3 class="title-category ">
+                    @T["Offers"]
+                </h3>
+                <div class="category-derc">
+                    @*<div class="row">
+                            <div class="col-sm-12">
+                                <div class="banners">
+                                    <div>
+
+                                        <a href="#"><img src="~/ClientTemplet/image/catalog/demo/category/img-cate.jpg" alt="img cate"><br></a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>*@
+                </div>
+                <!-- Filters -->
+                @*<div class="product-filter product-filter-top filters-panel">
+                        <div class="row">
+
+                            <div class="short-by-show form-inline text-right col-xs-12">
+                                <div class="form-group short-by">
+                                    <label class="control-label" for="input-sort">Sort By:</label>
+                                    <select id="input-sort" class="form-control"
+                                            onchange="location = this.value;">
+                                        <option value="" selected="selected">Default</option>
+                                        <option value="">Name (A - Z)</option>
+                                        <option value="">Name (Z - A)</option>
+                                        <option value="">Price (Low &gt; High)</option>
+                                        <option value="">Price (High &gt; Low)</option>
+                                        <option value="">Rating (Highest)</option>
+                                        <option value="">Rating (Lowest)</option>
+                                        <option value="">Model (A - Z)</option>
+                                        <option value="">Model (Z - A)</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>*@
+                <!-- //end Filters -->
+                <!--changed listings-->
+                <div class="products-list row nopadding-xs so-filter-gird">
+                    <div class="container-fluid">
+                        @{int counter = 0;}
+                        <!-- Product start -->
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                if (counter % 4 == 0)
+                                {
+                                @:</div><div class="row">
+                                }
+                                <div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="product-item-container">
+                                        <div class="left-block">
+                                            <div class="product-image-container second_img">
+                                                <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id">
+                                                    <img src="@Url.Content(item.FirstImgUrl)" class="img-1 img-responsive" alt="image">
+                                                    @*<img src="@Url.Content(item.FirstImgUrl)" class="img-2 img-responsive" alt="image">*@
+                                                </a>
+                                            </div>
+                                            @if (item.Offer > 0)
+                                            {
+                                                int presentage = (int)((item.Offer / item.Price) * 100) - 100;
+                                                <div class="box-label"> <span class="label-product label-sale"> @presentage % </span></div>
+
+                                            }
+                                            <div class="button-group so-quickview cartinfo--left">
+                                                <button type="button" class="addToCart btn-button" title="Add to cart" onclick="addToCart(@item.Id, '@item.NameE', '@item.NameA' , @item.Price,@item.Offer , '@item.FirstImgUrl', 1)">
+                                                    <i class="fa fa-shopping-basket"></i>
+                                                    <span>@T["AddtoCart"] </span>
+                                                </button>
+                                                <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="AddToWishList(@item.Id)">
+                                                    <i class="fa fa-heart"></i><span>@T["AddtoWishList"]</span>
+                                                </button>
+                                                @*<button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');">
+                                                        <i class="fa fa-refresh"></i><span>Compare this Product</span>
+                                                    </button>*@
+                                                <!--quickview-->
+                                                <a class="iframe-link btn-button quickview quickview_handler visible-lg" asp-action="GetProductByIDQuickView" asp-controller="ClientProduct" asp-route-id="@item.Id" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>@T["Quickview"]</span></a>
+                                                <!--end quickview-->
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <div class="caption">
+                                                <div class="rating">
+                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                </div>
+                                                @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                                                {
+                                                    <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id" title="@item.NameA" target="_self">@item.NameA</a></h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id" title="@item.NameE" target="_self">@item.NameE</a></h4>
+                                                }
+                                                <div class="price">
+                                                    @if (item.Offer > 0)
+                                                    {
+                                                        <span class="price-new">@item.Offer L.E</span>
+                                                        <span class="price-old">@item.Price L.E</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="price-new">@item.Price L.E</span>
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                counter++;
+                            }
+                        </div>
+
+                        <!-- Product End -->
+                    </div>
+
+
+                </div>
+                <!--// End Changed listings-->
+                <div id="pagination-container" class="col-xs-12 text-right pull-right ">
+
+                </div>
+                <!-- Filters -->
+                @*<div class="product-filter product-filter-bottom filters-panel">
+                        <div class="row">
+                            <div class="col-sm-6 text-left"></div>
+                            <div class="col-sm-6 text-right">Showing 1 to 15 of 15 (1 Pages)</div>
+                        </div>
+                    </div>*@
+                <!-- //end Filters -->
+
+            </div>
+
+        </div>
+
+
+        <!--Middle Part End-->
+        <!--Right Part Start -->
+        <!--<aside class="col-sm-4 col-md-3 content-aside" id="column-left">
+
+            <div class="module">
+                <h3 class="modtitle">Filter </h3>
+                <div class="modcontent ">
+                    <form class="type_2">
+
+                        <div class="table_layout filter-shopby">
+                            <div class="table_row">-->
+        <!-- - - - - - - - - - - - - - Category filter - - - - - - - - - - - - - - - - -->
+        <!--<div class="table_cell" style="z-index: 103;">
+            <legend>Search</legend>
+            <input class="form-control" type="text" value="" size="50" autocomplete="off" placeholder="Search" name="search">
+        </div>-->
+        <!--/ .table_cell -->
+        <!-- - - - - - - - - - - - - - End of category filter - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - SUB CATEGORY - - - - - - - - - - - - - - - - -->
+        <!--<div class="table_cell">
+            <fieldset>
+                <legend>Sub Category</legend>
+                <ul class="checkboxes_list">-->
+        <!-- Start of Adding Sub cat. -->
+        <!--<li>
+            <input type="checkbox" checked="" name="category" id="category_1">
+            <label for="category_1">Smartphone & Tablets</label>
+        </li>-->
+        <!-- End of Adding Sub cat. -->
+        <!--</ul>
+
+            </fieldset>
+
+        </div>-->
+        <!--/ .table_cell -->
+        <!-- - - - - - - - - - - - - - End SUB CATEGORY - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Price - - - - - - - - - - - - - - - - -->
+        <!--<div class="table_cell">
+            <fieldset>
+                <legend>Price</legend>
+                <div class="range">
+                    Range :
+                    <span class="min_val">$188.73</span> -
+                    <span class="max_val">$335.15</span>
+                    <input type="hidden" name="" class="min_value" value="188.73">
+                    <input type="hidden" name="" class="max_value" value="335.15">
+                </div>
+                <div id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                    <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                    <span class="ui-slider-handle ui-state-default ui-corner-all"></span>
+                    <span class="ui-slider-handle ui-state-default ui-corner-all"></span>
+                </div>
+            </fieldset>
+        </div>-->
+        <!--/ .table_cell -->
+        <!-- - - - - - - - - - - - - - End price - - - - - - - - - - - - - - - - -->
+        <!--</div>--><!--/ .table_row -->
+        <!--<footer class="bottom_box">
+            <div class="buttons_row">
+                <button type="submit" class="button_grey button_submit">Search</button>
+                <button type="reset" class="button_grey filter_reset">Reset</button>
+            </div>-->
+        <!--Back To Top-->
+        <!--<div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+            </footer>
+        </div>-->
+        <!--/ .table_layout -->
+        <!--</form>
+            </div>
+
+        </div>
+
+        <div class="module product-simple">
+            <h3 class="modtitle">
+                <span>Latest products</span>
+            </h3>
+            <div class="modcontent">
+                <div id="so_extra_slider_1" class="extraslider">-->
+        <!-- Begin extraslider-inner -->
+        <!--<div class="yt-content-slider extraslider-inner">
+            <div class="item ">
+                <div class="product-layout item-inner style1 ">
+                    <div class="item-image">
+                        <div class="item-img-info">
+                            <a href="#" target="_self" title="Mandouille short ">
+                                <img src="~/ClientTemplet/image/catalog/demo/product/80/8.jpg" alt="Mandouille short">
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title">
+                            <a href="#" target="_self" title="Mandouille short">Mandouille short </a>
+                        </div>
+                        <div class="rating">
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                        </div>
+                        <div class="content_price price">
+                            <span class="price-new product-price">$55.00 </span>&nbsp;&nbsp;
+
+                            <span class="price-old">$76.00 </span>&nbsp;
+
+                        </div>
+                    </div>-->
+        <!-- End item-info -->
+        <!-- End item-wrap-inner -->
+        <!--</div>-->
+        <!-- End item-wrap -->
+        <!--<div class="product-layout item-inner style1 ">
+            <div class="item-image">
+                <div class="item-img-info">
+                    <a href="#" target="_self" title="Xancetta bresao ">
+                        <img src="~/ClientTemplet/image/catalog/demo/product/80/7.jpg" alt="Xancetta bresao">
+                    </a>
+                </div>
+
+            </div>
+            <div class="item-info">
+                <div class="item-title">
+                    <a href="#" target="_self" title="Xancetta bresao">
+                        Xancetta bresao
+                    </a>
+                </div>
+                <div class="rating">
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                </div>
+                <div class="content_price price">
+                    <span class="price-new product-price">$80.00 </span>&nbsp;&nbsp;
+
+                    <span class="price-old">$89.00 </span>&nbsp;
+
+
+
+                </div>
+            </div>-->
+        <!-- End item-info -->
+        <!-- End item-wrap-inner -->
+        <!--</div>-->
+        <!-- End item-wrap -->
+        <!--<div class="product-layout item-inner style1 ">
+            <div class="item-image">
+                <div class="item-img-info">
+                    <a href="#" target="_self" title="Sausage cowbee ">
+                        <img src="~/ClientTemplet/image/catalog/demo/product/80/6.jpg" alt="Sausage cowbee">
+                    </a>
+                </div>
+
+            </div>
+            <div class="item-info">
+                <div class="item-title">
+                    <a href="#" target="_self" title="Sausage cowbee">
+                        Sausage cowbee
+                    </a>
+                </div>
+                <div class="rating">
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                </div>
+
+                <div class="content_price price">
+                    <span class="price product-price">
+                        $66.00
+                    </span>
+                </div>
+            </div>-->
+        <!-- End item-info -->
+        <!-- End item-wrap-inner -->
+        <!--</div>-->
+        <!-- End item-wrap -->
+        <!--<div class="product-layout item-inner style1 ">
+            <div class="item-image">
+                <div class="item-img-info">
+                    <a href="#" target="_self" title="Chicken swinesha ">
+                        <img src="~/ClientTemplet/image/catalog/demo/product/80/5.jpg" alt="Chicken swinesha">
+                    </a>
+                </div>
+
+            </div>
+            <div class="item-info">
+                <div class="item-title">
+                    <a href="#" target="_self" title="Chicken swinesha">
+                        Chicken swinesha
+                    </a>
+                </div>
+                <div class="rating">
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                </div>
+                <div class="content_price price">
+                    <span class="price-new product-price">$45.00 </span>&nbsp;&nbsp;
+
+                    <span class="price-old">$56.00 </span>&nbsp;
+
+
+
+                </div>
+            </div>-->
+        <!-- End item-info -->
+        <!-- End item-wrap-inner -->
+        <!--</div>-->
+        <!-- End item-wrap -->
+        <!--</div>
+
+        </div>-->
+        <!--End extraslider-inner -->
+        <!--</div>
+            </div>
+        </div>-->
+        <!-- Tags Part start -->
+        <!-- <div class="module tags-product">
+           <h3 class="modtitle">Tags</h3>
+           <div class="modcontent ">
+                <ul class="tags_cloud">
+                    <li><a href="#" class="button_grey">allergy</a></li>
+                    <li><a href="#" class="button_grey">baby</a></li>
+                    <li><a href="#" class="button_grey">beauty</a></li>
+                    <li><a href="#" class="button_grey">ear care</a></li>
+                    <li><a href="#" class="button_grey">for her</a></li>
+                    <li><a href="#" class="button_grey">for him</a></li>
+                    <li><a href="#" class="button_grey">first aid</a></li>
+                    <li><a href="#" class="button_grey">gift sets</a></li>
+                    <li><a href="#" class="button_grey">spa</a></li>
+                    <li><a href="#" class="button_grey">hair care</a></li>
+                    <li><a href="#" class="button_grey">herbs</a></li>
+                    <li><a href="#" class="button_grey">medicine</a></li>
+                    <li><a href="#" class="button_grey">natural</a></li>
+                    <li><a href="#" class="button_grey">oral care</a></li>
+                    <li><a href="#" class="button_grey">pain</a></li>
+                    <li><a href="#" class="button_grey">pedicure</a></li>
+                    <li><a href="#" class="button_grey">personal care</a></li>
+                    <li><a href="#" class="button_grey">probiotics</a></li>
+
+                </ul>
+
+           </div>
+
+        </div> -->
+        <!-- Tags Part start -->
+        <!--</aside>-->
+        <!--Right Part End -->
+
+
+    </div>
+    <!--Middle Part End-->
+</div>
+@section Scripts{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+
+    <script type="text/javascript">
+        // Check if Cookie exists
+        view = 'grid';
+        if ($.cookie('display')) {
+            view = $.cookie('display');
+        } else {
+            view = 'grid';
+        }
+        if (view) display(view);
+        //--></script>
+
+
+
+
+    <script>
+
+
+
+        var items = $('.products-list .product-layout');
+        var numitems = items.length;
+        var perpage = 20;
+
+        items.slice(perpage).hide();
+
+
+        $('#pagination-container').pagination({
+            items: numitems,
+            itemsOnPage: perpage,
+            prevText: "<",
+            nextText: ">",
+            onPageClick: function (pageNumber) {
+                var showFrom = perpage * (pageNumber - 1);
+                var showTo = showFrom + perpage;
+                items.hide().slice(showFrom, showTo).show();
+
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 600);
+            }
+        });
+
+    </script>
+}
+

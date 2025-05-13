@@ -1,0 +1,94 @@
+﻿@page
+@model ExternalLoginModel
+@{
+    ViewData["Title"] = "Register";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="~/css/Register-custom.css" rel="stylesheet" />
+   <style>
+       .reginput{
+           font-size:1em;
+       }
+
+   </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h2>@ViewData["Title"]</h2>
+        <h4 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h4>
+        <hr />
+
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-4">
+                <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-outline mb-2 field">
+                        @*<label asp-for="Input.UserName"></label>*@
+                        @* <input asp-for="Input.UserName" class="form-control" />*@
+                        <input asp-for="Input.UserName" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                        <label asp-for="Input.UserName" class="form-label reglabel">User Name</label>
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div><br />
+
+                    @*.
+        .
+        ..  <div class="form-outline mb-2 field">
+                            <input asp-for="Input.UserName" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                            <label asp-for="Input.UserName" class="form-label reglabel">Name</label>
+                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
+
+                        </div>
+            .
+        .*@
+
+                    @*<div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>*@
+
+                    <div class="form-outline mb-2 field">
+                        <input asp-for="Input.Email" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                        <label asp-for="Input.Email" class="form-label reglabel">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div><br />
+
+                    @*<div class="form-outline mb-2 field">
+            <input asp-for="Input.Email" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+            <label asp-for="Input.Email" class="form-label reglabel">Email</label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+        </div>*@
+
+                    @*<div class="form-group">
+            <label asp-for="Input.PhoneNumber"></label>
+            <input asp-for="Input.PhoneNumber" class="form-control" />
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>*@
+
+                   <div class="form-outline mb-2 field">
+                        <input asp-for="Input.PhoneNumber" class="form-control form-control-lg shadow-none removeborders reginput" placeholder=" " required />
+                        <label asp-for="Input.PhoneNumber" class="form-label reglabel">Phone Number</label>
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+
+                    </div><br />
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>

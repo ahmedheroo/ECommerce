@@ -1,0 +1,335 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3 style="color:gray">Orders</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Orders</li>
+
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<ul class="nav nav-pills ml-3">
+    <li class="ml-4 active"><a class="font-weight-bolder" data-toggle="tab" href="#home">Orders </a></li>
+    <li class="ml-4"><a class="font-weight-bolder" data-toggle="tab" href="#menu1">  Deleted Orders</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+
+
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="input-group input-group-lg">
+                                                <input type="search" id="btnSearch" class="form-control form-control-lg" placeholder="Type your keywords here">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-lg btn-default">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table id="example1" class="table table-bordered  table-striped mt-3">
+                                                <thead class="table-primary">
+                                                    <tr>
+                                                        <th>Order No</th>
+                                                        <th>Order Date</th>
+                                                        <th>Client Name</th>
+                                                        <th>Delivery Date</th>
+                                                        <th>Invoice</th>
+                                                        <th>Statueus</th>
+                                                        <th>Phone</th>
+                                                        <th>#</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblProduct" class="table-sm">
+                                                    @foreach (var item in Model.Where(x => x.IsDeleted != true))
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Id</td>
+                                                            <td style=" direction: rtl;">@item.OrderDate.ToShortDateString()</td>
+                                                            <td>@item.User.UserName</td>
+                                                            <td style=" direction: rtl;">@item.DeliveryDate.ToShortDateString()</td>
+                                                            <td>@(item.TotalPrice - item.DicountValue )</td>
+                                                            <td>
+                                                                <form class="form-horizontal" asp-controller="AdminOrder" asp-route-id="@item.Id" method="post" asp-action="UpdateStatues">
+                                                                    @if (item.Status == "Deliverd")
+                                                                    {
+                                                                        <select onchange="this.form.submit()" class="form-control" name="stateus">
+                                                                            <option value="OrderProccessing">OrderProccessing</option>
+                                                                            <option value="PickedByCourier">PickedByCourier</option>
+                                                                            <option value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd" selected>Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                    else if (item.Status == "PickedByCourier")
+                                                                    {
+                                                                        <select onchange="this.form.submit()" class="form-control" id="@item.Id" name="stateus">
+                                                                            <option value="OrderProccessing">OrderProccessing</option>
+                                                                            <option selected value="PickedByCourier">PickedByCourier</option>
+                                                                            <option value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd">Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                    else if (item.Status == "OnTheWay")
+                                                                    { <select onchange="this.form.submit()" class="form-control" id="@item.Id" name="stateus">
+                                                                            <option value="OrderProccessing">OrderProccessing</option>
+                                                                            <option value="PickedByCourier">PickedByCourier</option>
+                                                                            <option selected value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd">Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <select onchange="this.form.submit()" class="form-control" id="@item.Id" name="stateus">
+                                                                            <option selected value="OrderProccessing">OrderProccessing</option>
+                                                                            <option value="PickedByCourier">PickedByCourier</option>
+                                                                            <option value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd">Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                </form>
+                                                            </td>
+                                                            <td>@item.Discount</td>
+                                                            <td>
+
+                                                                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu">
+                                                                    <a asp-action="orderDetails" asp-controller="AdminOrder" asp-route-id="@item.Id" class=" nav-link" tabindex="-1"><i class="fas fa-eye"></i> View</a>
+                                                                    <a asp-action="DeleteToRecycle" asp-controller="AdminOrder" asp-route-id="@item.Id" class=" nav-link" tabindex="-1" style="color:red"> <i class="far fa-trash-alt"></i> Delete</a>
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    }
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+
+
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="input-group input-group-lg">
+                                                <input type="search" id="btnSearch" class="form-control form-control-lg" placeholder="Type your keywords here">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-lg btn-default">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table id="example1" class="table table-bordered  table-striped mt-3">
+                                                <thead class="table-primary">
+                                                    <tr>
+                                                        <th>Order No</th>
+                                                        <th>Order Date</th>
+                                                        <th>Client Name</th>
+                                                        <th>Delivery Date</th>
+                                                        <th>Invoice</th>
+                                                        <th>Statueus</th>
+                                                        <th>Phone</th>
+                                                        <th>#</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblProduct" class="table-sm">
+                                                    @foreach (var item in Model.Where(x => x.IsDeleted == true))
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Id</td>
+                                                            <td style=" direction: rtl;">@item.OrderDate.ToShortDateString()</td>
+                                                            <td>@item.User.UserName</td>
+                                                            <td style=" direction: rtl;">@item.DeliveryDate.ToShortDateString()</td>
+                                                            <td>@(item.TotalPrice - item.DicountValue )</td>
+                                                            <td>
+                                                                <form class="form-horizontal" asp-controller="AdminOrder" asp-route-id="@item.Id" method="post" asp-action="UpdateStatues">
+                                                                    @if (item.Status == "Deliverd")
+                                                                    {
+                                                                        <select onchange="this.form.submit()" class="form-control" name="stateus">
+                                                                            <option value="OrderProccessing">OrderProccessing</option>
+                                                                            <option value="PickedByCourier">PickedByCourier</option>
+                                                                            <option value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd" selected>Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                    else if (item.Status == "PickedByCourier")
+                                                                    {
+                                                                        <select onchange="this.form.submit()" class="form-control" id="@item.Id" name="stateus">
+                                                                            <option value="OrderProccessing">OrderProccessing</option>
+                                                                            <option selected value="PickedByCourier">PickedByCourier</option>
+                                                                            <option value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd">Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                    else if (item.Status == "OnTheWay")
+                                                                    { <select onchange="this.form.submit()" class="form-control" id="@item.Id" name="stateus">
+                                                                            <option value="OrderProccessing">OrderProccessing</option>
+                                                                            <option value="PickedByCourier">PickedByCourier</option>
+                                                                            <option selected value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd">Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <select onchange="this.form.submit()" class="form-control" id="@item.Id" name="stateus">
+                                                                            <option selected value="OrderProccessing">OrderProccessing</option>
+                                                                            <option value="PickedByCourier">PickedByCourier</option>
+                                                                            <option value="OnTheWay">OnTheWay</option>
+                                                                            <option value="Deliverd">Deliverd</option>
+                                                                        </select>
+                                                                    }
+                                                                </form>
+                                                            </td>
+                                                            <td>@item.Discount</td>
+                                                            <td>
+
+                                                                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                                                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu">
+                                                                    <a asp-action="orderDetails" asp-controller="AdminOrder" asp-route-id="@item.Id" class=" nav-link" tabindex="-1"><i class="fas fa-eye"></i> View</a>
+                                                                    <a asp-action="DeleteToRecycle" asp-controller="AdminOrder" asp-route-id="@item.Id" class=" nav-link" tabindex="-1" style="color:red"> <i class="far fa-trash-alt"></i> Delete</a>
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    }
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false, "searching": false,
+                buttons: [{
+                    extend: 'excel',
+                    text: ' Export',
+                    title: 'Orders',
+                    className: 'btn btn-sm mr-1',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }, {
+                    extend: 'print',
+                    text: 'print',
+                    title: 'Orders',
+                    className: 'btn btn-sm mr-1',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }],
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        $('#btnSearch').keyup(function () {
+            search_table($(this).val());
+        });
+        function search_table(value) {
+            $("#tblProduct tr").each(function () {
+                var found = 'false';
+                $(this).each(function () {
+                    if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                        found = 'true';
+                    }
+                });
+                if (found == 'true') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        };
+    </script>
+    <script>
+        //$('form select').on('change', function () {
+        //    $(this).closest('form').submit();
+        //});
+
+        //function updateOrderStat() {
+        //    var id = $(this).attr('id');
+            //var stateus = this.find(":selected").text();
+           /* alert(id + stateus)*/
+            @*{
+                $.ajax({
+                    url: '@Url.Action("UpdateStatues", "AdminOrder")',
+                    type: 'POST',
+                    cache: false,
+                    data: { id: id, stateus: stateus }
+                }).done(function (result) {
+
+                });
+            }*@
+       /* }*/
+    </script>
+}
+
+
+

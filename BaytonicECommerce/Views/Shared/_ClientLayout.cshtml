@@ -1,0 +1,718 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+@using Microsoft.AspNetCore.Identity
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.smartaddons.com/templates/html/emarket/home4.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Sep 2021 16:36:31 GMT -->
+<!-- Added by HTTrack -->
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+    <!-- Basic page needs
+    ============================================ -->
+    <title>BytoniC - The Best for Your Home</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content=" Home, Kitchen, Home applience" />
+    @*<meta name="description" content="eMarket is a powerful Multi-purpose HTML5 Template with clean and user friendly design. It is definite a great starter for any eCommerce web project." />*@
+
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="0AquFpFyjakxRWiIR7DGwTSFcE_XsU_PALqCYf6TpHU" />
+    <meta name="facebook-domain-verification" content="iit35amil3clvg1hgjdimx4ii626sd" />
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Favicon
+    ============================================ -->
+
+    <link rel="shortcut icon" type="image/png" href="~/ClientTemplet/image/icon/Logoicon.png" />
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WFK3DPD');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-216721565-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-216721565-1');
+    </script>
+
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="~/ClientTemplet/css/bootstrap/css/bootstrap.min.css">
+    <link href="~/ClientTemplet/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="~/ClientTemplet/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="~/ClientTemplet/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/lib.css" rel="stylesheet">
+    <link href="~/ClientTemplet/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="~/ClientTemplet/js/minicolors/miniColors.css" rel="stylesheet">
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="~/ClientTemplet/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/themecss/so-newletter-popup.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/footer/footer4.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/home4.css" rel="stylesheet" />
+    <link href="~/ClientTemplet/css/header/header4.css" rel="stylesheet" />
+    <link href="~/ClientTemplet/css/responsive.css" rel="stylesheet">
+    <link href="~/ClientTemplet/css/custom.css" rel="stylesheet" />
+    <link href="~/ClientTemplet/css/cart.css" rel="stylesheet" />
+    <!-- Google web fonts
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+
+</head>
+
+<body class="common-home res layout-4  " style="background-color:#fcfcfc">
+    @inject SignInManager<IdentityUser> SignInManager
+    @inject UserManager<IdentityUser> userManager
+    @inject RoleManager<IdentityRole> Roles
+    @*<div id="Newpreload"><center><div id="gifLoader"><img src="~/ClientTemplet/image/BaytonicImgs/Preloader.gif" /></div></center></div>*@
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WFK3DPD"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="newPreloader" class="preloader preloader-visible">
+        <!--div class="preloader-num"></div-->
+        <div class="loader loading ">
+            @*<img class="loaderImg" src="~/ClientTemplet/image/BaytonicImgs/Logo.png" alt="logo">*@
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <div id="wrapper" class="wrapper-fluid banners-effect-10" style="visibility:hidden">
+
+        <!-- Header Container  -->
+        <header id="header" class=" typeheader-4">
+            <!-- Header Top -->
+            <!-- #region Header Top -->
+            <div class="header-top hidden-compact">
+                <div class="container">
+                    <div class="row">
+                        <div class="header-top-left col-lg-6 col-md-4 col-sm-6 col-xs-6"><partial name="_SelectLangaugePartial" /></div>
+                        <div class="header-top-right collapsed-block col-lg-6 col-md-8 col-sm-6 col-xs-6">
+                            <ul class="top-link list-inline" style="margin:0 10% 0 10%">
+                                <li class="account pull-left" id="my_account">
+                                    <a href="#" title="My Account " class="btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        <span> @T["MyAccount"] </span>  <span class="fa fa-caret-down"></span>
+
+                                    </a>
+                                    <partial name="_LoginPartial" />
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #endregion Header Top -->
+            <!---- #endregion Header Top  -->
+            <!-- Header center -->
+            <div class="header-middle" id="headdiv">
+                <div class="container">
+                    <div class="row">
+                        <div class="rStart col-lg-3 col-md-3 col-sm-8 col-xs-8 col-xm-8 col-xr-7 ">
+                            <div class="rMenu col-sm-3 col-xs-2 col-xr-2 hidden-lg hidden-md text-right">
+                                <div class="responsive so-megamenu megamenu-style-dev ">
+                                    <nav class="navbar-default">
+                                        <div class=" container-megamenu  horizontal open ">
+                                            <div class="navbar-header">
+                                                <button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                </button>
+                                            </div>
+
+                                            <div id="closemenu" class="megamenu-wrapper high-index">
+                                                <span id="remove-megamenu" class="fa fa-times"></span>
+                                                <div class="megamenu-pattern">
+                                                    <div class="container-mega">
+
+                                                        <ul class="megamenu" data-transition="slide" data-animationtime="250">
+
+                                                            <li>
+                                                                <a asp-action="Index" asp-controller="Home">@T["Home"] </a>
+                                                            </li>
+
+                                                            <!-- disable li item from collapsing to redo it use this (class="with-sub-menu hover") in li item class -->
+                                                            @*<partial name="_AllCategories"/>*@
+                                                            @await Component.InvokeAsync("AllCategories")
+                                                            <li class="">
+                                                                <p class="close-menu"></p>
+                                                                <a asp-action="AboutUS" asp-controller="Home" class="clearfix">
+                                                                    <strong>@T["AboutUs"]</strong>
+
+                                                                </a>
+
+                                                            </li>
+                                                            <li class="">
+                                                                <p class="close-menu"></p>
+                                                                <a asp-action="ContactUS" asp-controller="Home" class="clearfix">
+                                                                    <strong>@T["Contact"]</strong>
+
+                                                                </a>
+
+                                                            </li>
+
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-9 col-xs-8 text-left col-xr-9  text-lg-right text-md-right ">
+                                <div class="logo text-sm-left text-xs-left"><a asp-action="Index" asp-controller="Home"><img height="50" width="150" class="logo-img" src="~/ClientTemplet/image/BaytonicImgs/Logo.png" title="Your Store" alt="Your Store" /></a></div>
+                            </div>
+                        </div>
+
+                        <div class="rMid col-lg-7 col-md-7 high-index text-center hidden-sm hidden-xs">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="search-header-w">
+                                        <div class="icon-search hidden-lg hidden-md "><i class="fa fa-search"></i></div>
+                                        <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
+                                            <form method="GET" asp-action="GetProductsByTags" asp-controller="ClientProduct">
+                                                <div id="search0" class="search input-group form-group">
+
+                                                    <input id="tag" class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="Keyword here..." name="tag">
+                                                    <span class="input-group-btn">
+                                                        <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                                </div>
+                                                <input type="hidden" name="route" value="product/search" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="rEnd col-lg-1 col-md-1 col-sm-4 col-xs-3 col-xm-4 col-xr-5 text-left " style="">
+                            <div class="search-header-w text-center col-sm-3 col-xs-6 col-xr-6 hidden-lg hidden-md text-center text-sm-right">
+                                <div class="icon-search hidden-lg hidden-md "><i class="searchCollapse fa fa-search"></i></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-5 col-xs-6 col-xr-6">
+                                <div class="cartview">
+                                    <ul class="icon1 sub-icon1 profile_img ">
+
+                                        <li>
+                                            <a class="active-icon c1" asp-action="GetUserCarts" asp-controller="ClientCart"><i class="fas fa-shopping-cart"></i> @T["Cart"] </a><div id="cartnumber" class="rate">0</div>
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 text-center " style="margin-top:-20px">
+                            <div class="responsive so-megamenu megamenu-style-dev text-lg-center text-md-center hidden-xs hidden-sm menu-lg">
+                                <nav class="navbar-default">
+                                    <div class=" container-megamenu  horizontal open ">
+                                        <div class="navbar-header">
+                                            <button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                        </div>
+
+                                        <div class="megamenu-wrapper high-index">
+                                            <span id="remove-megamenu" class="fa fa-times"></span>
+                                            <div class="megamenu-pattern">
+                                                <div class="container-mega">
+
+                                                    <ul class="megamenu" data-transition="slide" data-animationtime="250">
+
+                                                        <li id="homeLink">
+                                                            <a asp-action="Index" asp-controller="Home">@T["Home"] </a>
+                                                        </li>
+
+                                                        <!-- disable li item from collapsing to redo it use this (class="with-sub-menu hover") in li item class -->
+                                                        @*<partial name="_AllCategories"/>*@
+                                                        @await Component.InvokeAsync("AllCategories")
+                                                        <li id="aboutUsLink" class="">
+                                                            <p class="close-menu"></p>
+                                                            <a asp-action="AboutUS" asp-controller="Home" class="clearfix">
+                                                                <strong>@T["AboutUs"]</strong>
+
+                                                            </a>
+
+                                                        </li>
+                                                        <li id="contactUsLink" class="">
+                                                            <p class="close-menu"></p>
+                                                            <a asp-action="ContactUS" asp-controller="Home" class="clearfix">
+                                                                <strong>@T["Contact"]</strong>
+
+                                                            </a>
+
+                                                        </li>
+
+
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div id="sosearchpro" class=" hidden-lg hidden-md col-sm-12 text-center sosearchpro-wrapper so-search " style="margin-left: 11%;">
+                            <form asp-action="GetProductsByTags" asp-controller="ClientProduct" style="width: 80%;">
+                                <div id="search0" class="search input-group form-group" style="display: none;">
+
+                                    <input id="tag" class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="Keyword here..." name="tag">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class=" fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                                <input type="hidden" name="route" value="product/search">
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- //Header center -->
+            <!-- Header Bottom -->
+            @*<div class="header-bottom " id="headdiv2">
+                    <div class="container">
+                        <div class="row">
+
+
+                        </div>
+                    </div>
+
+                </div>*@
+        </header>
+        <!-- //Header Container  -->
+        <!-- Main Container  -->
+        <div class="main-container">
+            <div id="content" onclick="closeMegaMenu()">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <!-- #region footer -->
+        <footer id="nfooter" class="footer-container typefooter-4 marg-t-3" style="margin-bottom:0px;">
+
+
+
+            <div class="container">
+                <!-- #region Middle footer -->
+                <section class="footer-middle" style=" background-color: #fcfcfc; color: #1e1e1e !important;">
+                    <div class="container">
+                        <div class="row news">
+                            <div class="col-sm-12">
+                                <div class="content" style="text-align :center !important">
+                                    <h3 class="news-h">@T["SUBSCRIBENOW"]</h3>
+                                    <h6 class="content-tuned">@T["SubscribeToOurNewsletterAndStayTunedWithFutureUpdates"]</h6>
+                                    <div class="input-group"><input id="email" type="email" class="form-control new-form-control" placeholder="@T["EntereMailToSubscribe"]"> <span class="input-group-btn"> <button onclick="AddToNewsLetter()" class="btn news-btn" type="submit">@T["SubscribeNow0"]</button> </div>
+                                    @*<div class="text-center"><a class="unsubscribe-link" href="#">Would you like to unsubscribe?</a> </div>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style=" margin-top : 10px">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col_4202 footer-col col-style">
+                                <div class="infos-footer box-footer">
+                                    <div class="module">
+                                        <h3 class="modtitle incon" style="margin-right: 0px !important;">@T["Information"]</h3>
+                                        <ul>
+
+                                            <li class="mail incon"><i class="fa fa-envelope"></i><span class="adress-span">@T["E-Mail"] : <a class="incon" href="mailto:ahmedhassssan2016@gmail.com"><span>ahmedhassssan2016@gmail.com</span></a></span></li>
+                                            <li class="phone incon">
+                                                <i class="fa fa-mobile">3</i> <span class="adress-span">@T["phone"] : 01015855016</span> @*<br> <span class="adress-span">Phone 2:</span>*@
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col_bko7 footer-col col-style incon">
+                                    <div class="box-account box-footer">
+                                        <div class="module clearfix">
+                                            <div class="modcontent">
+                                                <h3 class="modtitle incon">@T["Policies"]</h3>
+                                                <ul class="menu">
+                                                    <li>
+                                                        <a class="incon" href="#">@T["ReturnPolicy"]</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="incon" href="#">@T["Privacy&Policy"]</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="incon" href="#">@T["Terms&Conditions"]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col_6urb footer-col col-style">
+                                <div class="box-information box-footer">
+                                    <div class="module clearfix">
+                                        <div class="modcontent">
+                                            <h3 class="modtitle incon" style="margin-right: 0px !important;">@T["OurPages"] </h3>
+                                            <ul class="menu">
+                                                <li>
+                                                    <a class="incon" asp-action="Index" asp-controller="Home">@T["Home"]</a>
+                                                </li>
+                                                <li>
+                                                    <a class="incon" asp-action="AboutUS" asp-controller="Home">@T["AboutUs"]</a>
+                                                </li>
+                                                <li>
+                                                    <a class="incon" asp-action="ContactUS" asp-controller="Home">@T["Contact"]</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col_3d8g footer-col col-style">
+                                <div class="box-service box-footer">
+                                    <div class="module clearfix">
+                                        <div class="modcontent">
+                                            <h3 class="modtitle incon" style="margin-right: 0px !important;">@T["OurServices"]</h3>
+                                            <ul class="menu">
+                                                <li>
+                                                    <a class="incon iframe-link btn-button quickview quickview_handler " asp-action="Policy" asp-controller="Home" title="Quick view" data-fancybox-type="iframe">@T["ECommercePolicy"]</a>
+                                                </li>
+                                                <li>
+                                                    <a class="incon">@T["NeedHelp/Support:"]</a>
+                                                </li>
+                                                <li>
+                                                    <a class="incon" href="mailto:ahmedhassssan2016@gmail.com"><span>ahmedhassssan2016@gmail.com</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="container text-center">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div>
+                                            <hr style="width: 50%; border-top:2px solid #e9e7e7 ;">
+                                            <h3 style="font-weight: bold;">@T["FollowUs"]</h3><Br />
+
+                                            <span class="social">
+                                                <a class="_blank facebookICON" href="#" target="_blank"><i class="fab fa-facebook-square incon fa-xs"></i></a>
+                                            </span>
+                                            <span class="social">
+                                                <a class="_blank youtubeICON" href="#" target="_blank"><i class="fab fa-youtube-square incon fa-xs"></i></a>
+                                            </span>
+                                            <span class="social">
+                                                <a class="_blank instaICON" href="#" target="_blank"><i class="fab fa-instagram incon fa-xs"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </section>
+            </div>
+            <div class="container" style="width: 100%; background-color: #fcfcfc;"><br></div>
+
+            <section class="footer-bottom" style="background-color: #ffb600; ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 copyright-w">
+                            <div class="copyright" style="color:#1e1e1e">
+                                All Rights © Reserved to <a style="color: darkred;" href="ahmedhassssan2016@gmail.com" target="_blank"><strong>Ahmed Hassan </strong></a><span>for software developments</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 payment-w">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- #endregion -->
+            <!-- /Footer Bottom Container -->
+            <!--Back To Top-->
+            @*<div class="back-to-top"><i class="fa fa-angle-up"></i></div>*@
+
+
+        </footer>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- #endregion -->
+    <!-- //end Footer Container -->
+    <!-- End Color Scheme
+    ============================================ -->
+    <!-- Include Libs & Plugins
+    ============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="~/ClientTemplet/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/libs.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/unveil/jquery.unveil.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/datetimepicker/moment.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/modernizr/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/minicolors/jquery.miniColors.min.js"></script>
+
+    <!-- Theme files
+    ============================================ -->
+
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/application.js"></script>
+
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/homepage.js"></script>
+
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/toppanel.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/so_megamenu.js"></script>
+    <script type="text/javascript" src="~/ClientTemplet/js/themejs/addtocart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/ClientTemplet/js/cartLocalStaorage.js"></script>
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "105606628614472");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v12.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <script src="~/js/SessionUpdater.js"></script>
+
+    <script type="text/javascript">
+
+    // initialize Session Updater on page
+
+    SetupSessionUpdater('/Home/KeepSessionAlive');
+
+    SessionUpdater.Setup('@Url.Action("KeepSessionAlive","Home")');
+
+    </script>
+
+    <script type="text/javascript">
+
+        function keepAliveFunc() {
+
+            setTimeout("keepAlive()", 60000);
+
+        };
+
+        function keepAlive() {
+
+            $.post('@Url.Action("KeepSessionAlive", "Home")', null, function () { keepAliveFunc(); });
+
+        };
+        $(keepAliveFunc());
+
+    </script>
+    <script>
+
+        //preloader
+        //$(window).load(function () {
+        //    $("#Newpreload").fadeout(1000);
+        //    setTimeout(() => {
+        //        $("#wrapper").css("visibility", "visible");
+        //    }, 1000);
+        //});
+
+        $(window).load(function () {
+            $("#wrapper").fadeOut(0);
+            setTimeout(function () {
+                $("#newPreloader").fadeOut(0);
+                $("#wrapper").fadeIn(1);
+                $("#wrapper").css("visibility", "visible")
+            }, 1000);
+        });
+        //$(window).load(function () {
+        //    var currentUrl = window.location.href;
+        //    if (currentUrl.includes("AboutUS")) {
+        //        document.getElementById("aboutUsLink").style.backgroundColor = "#ffb600";
+        //    }
+        //    else if (currentUrl.includes("ContactUS")) {
+        //        document.getElementById("contactUsLink").style.backgroundColor = "#ffb600";
+        //    }
+        //   else if (currentUrl.includes("Category")) {
+        //        document.getElementById("CategoryLink").style.backgroundColor = "#ffb600";
+        //    }
+        //    else
+        //    {
+        //        document.getElementById("homeLink").style.backgroundColor = "#ffb600";
+        //    }
+        //});
+        function closeMegaMenu()
+        {
+            $('.megamenu-wrapper').removeClass('so-megamenu-active');
+
+            //document.getElementById('closemenu').classList.remove('so-megamenu-active');
+        }
+
+        function AddToCart(productId) {
+
+            if (productId && productId != '') {
+                $.ajax({
+                    url: '@Url.Action("AddCartItem", "ClientCart")',
+                    type: 'POST',
+                    cache: false,
+                    data: { productId: productId }
+                }).done(function (result) {
+
+                });
+            }
+        }
+         function AddToWishList(productId) {
+
+            if (productId && productId != '') {
+                $.ajax({
+                    url: '@Url.Action("AddWishListItem", "ClientWishList")',
+                    type: 'POST',
+                    cache: false,
+                    data: { productId: productId }
+                }).done(function (result) {
+                    addProductNotice('@T["ProductAddedToWishlistSuccessfully"]', '', '', 'success');
+                    $('#jGrowl').css({ 'color': '#0b601b' });
+                });
+            }
+        }
+        function AddToNewsLetter() {
+            var email = document.getElementById('email').value;
+            if (email && email != '') {
+                alert(email);
+                $.ajax({
+                    url: '@Url.Action("CreateNewsLetter", "Home")',
+                    type: 'POST',
+                    cache: false,
+                    data: { email: email }
+                }).done(function (result) {
+                    if (result == 1) {
+                        addProductNotice('@T["YourMailAddedSuccessfully"]', '', '', 'success');
+                        $('#jGrowl').css({ 'color': '#0b601b' });
+                    }
+                    else
+                    {
+                        addProductNotice('@T["YourMailAlreadyExist"]', '', '', 'success');
+                        $('#jGrowl').css({ 'color': 'red' });
+                    }
+                });
+            }
+            else
+            {
+                addProductNotice('@T["PleaseWriteYourMailToJoinUs"]', '', '', 'success');
+                $('#jGrowl').css({ 'color': 'red' });
+            }
+        }
+
+
+
+         @*function UpdateCartQuantity(cartId) {
+            var quantity = document.getElementById("txtQuantity"+cartId).value;
+            if (cartId && cartId != '' && Number(quantity)) {
+                $.ajax({
+                    url: '@Url.Action("UpdateCartQuantity", "ClientCart")',
+                    type: 'POST',
+                    cache: false,
+                    data: { cartId: cartId, NewQuantity: quantity }
+                }).done(function (result) {
+                    $('#cartTableDv').html() = result;
+                });
+            }
+        }*@
+          @*function DeleteCartItem(cartId) {
+
+              if (cartId && cartId != '') {
+                $.ajax({
+                    url: '@Url.Action("DeleteCartItem", "ClientCart")',
+                    type: 'POST',
+                    cache: false,
+                    data: { cartId: cartId }
+                }).done(function (result) {
+                    $('#cartTableDv').html(result);
+
+                });
+            }
+        }*@
+    </script>
+
+    @await Html.PartialAsync("_notificationPartial")
+
+    @RenderSection("Scripts", false)
+</body>
+
+
+</html>

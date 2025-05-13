@@ -1,0 +1,81 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+@model IEnumerable<Category>
+@*<li class="with-sub-menu hover">
+        <p class="close-menu"></p>
+        <a id="CategoryLink" href="#" class="clearfix">
+            <strong>@T["Categories"]</strong>
+            <b class="caret"></b>
+        </a>
+        <div class="sub-menu" style="width: 100%; display: none;">
+            <div class="content">
+                <div class="row">
+
+                    @foreach (var item in Model)
+                    {
+                        if (item.ParentId == null)
+                        {
+                            <div class="col-md-3">
+                                @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                                {
+                                    <a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@item.Id" class="title-submenu">@item.NameA</a>
+
+                                }
+                                else
+                                {
+                                    <a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@item.Id" class="title-submenu">@item.NameE</a>
+                                }
+                                <div class="row">
+                                    <div class="col-md-12 hover-menu">
+                                        <div class="menu">
+                                            <ul>
+                                                @foreach (var x in Model)
+                                                    if (x.ParentId == item.Id)
+                                                    {
+                                                        @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                                                        {
+                                                            <li><a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@x.Id" class="main-menu">@x.NameA</a></li>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@x.Id" class="main-menu">@x.NameE</a></li>
+
+                                                        }
+                                                    }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </li>*@
+@foreach (var item in Model)
+{
+    if (item.ParentId == null)
+    {
+        <li class="">
+        <p class="close-menu"></p>
+    @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+    {
+        <a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@item.Id" class="clearfix">
+            <strong>@item.NameA</strong>
+        </a>
+
+    }
+    else
+    {
+        <a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@item.Id" class="clearfix"><strong>@item.NameE</strong></a>
+    }
+        </li>
+    }
+    }
+
+           

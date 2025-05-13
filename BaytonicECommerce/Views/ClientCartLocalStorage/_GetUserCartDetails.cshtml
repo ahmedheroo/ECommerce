@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Cart>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td class="text-center">Image</td>
+            <td class="text-left">Product Name</td>
+            <td class="text-left">Quantity</td>
+            <td class="text-right">Unit Price</td>
+            <td class="text-right">Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{decimal Totalcart = 0; }
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="text-center"><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.ProductId"><img hight="70px" width="70px" src="@Url.Content(item.Product.FirstImgUrl)" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-thumbnail" /></a></td>
+            <td class="text-left">
+                <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.ProductId">@item.Product.NameE</a><br />
+            </td>
+            <td class="text-left" width="200px">
+                <div class="input-group btn-block quantity">
+                    @{string QuyId = "txtQuantity" + item.Id;}
+                    <input id=@QuyId type="text" name="quantity" value="@item.Quantity" onkeyup="UpdateCartQuantity(@item.Id)" size="1" class="form-control" />
+                    <span class="input-group-btn">
+                        @*  <button data-toggle="tooltip" title="Update" class="btn btn-primary" onclick="UpdateCartQuantity(@item.Id)"><i class="fa fa-clone"></i></button>*@
+                        <button type="button" data-toggle="tooltip" title="Remove" class="btn btn-danger" onClick="DeleteCartItem(@item.Id)"><i class="fa fa-times-circle"></i></button>
+                    </span>
+                </div>
+            </td>
+            @if (item.Product.Offer > 0)
+            {
+                <td class="text-right">
+                    <div class="price"> <span class="price-new">@item.Product.Offer LE</span> <span class="price-old">@item.Product.Price LE</span></div>
+                </td>
+            }
+            else
+            {
+                <td class="text-right">
+                    <div class="price"> <span class="price-new" itemprop="price">@(item.Product.Price) L.E</span></div>
+                </td>
+            }
+            <td class="text-right">@(item.TotalPrice) LE</td>
+        </tr>
+            Totalcart += item.TotalPrice;
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"></td>
+            <td class="text-right" >
+                <strong>Sub-Total:</strong>
+            </td>
+
+            <td class="text-right">@Totalcart EGP</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td class="text-right">
+                <strong>Flat Shipping Rate:</strong>
+            </td>
+            <td class="text-right">0 EGP</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td class="text-right">
+                <strong>Eco Tax (-2.00):</strong>
+            </td>
+            <td class="text-right">0 EGP</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td class="text-right" >
+                <strong>VAT (20%):</strong>
+            </td>
+            <td class="text-right">0 EGP</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td class="text-right">
+                <strong>Total:</strong>
+            </td>
+            <td class="text-right">0 EGP</td>
+        </tr>
+    </tfoot>
+</table>

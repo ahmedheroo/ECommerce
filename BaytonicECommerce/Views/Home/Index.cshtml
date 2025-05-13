@@ -1,0 +1,503 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+
+@model HomePageVM
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div id="productsContainer" class="main-container">
+    <div id="content">
+        <div class="container">
+            <div class="box-content1">
+                @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                {
+                    @* large slider img *@
+                    <div class="module sohomepage-slider slider-lg-img ">
+                        <div class="yt-content-slider" data-rtl="yes" data-autoplay="yes" data-autoheight="no" data-delay="11" data-speed="0.6" data-margin="0" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="no" data-pagination="yes" data-lazyload="no" data-loop="yes" data-hoverpause="no">
+                            <div class="yt-content-slide ">
+                                <a asp-action="GetProductsByOffers" asp-controller="ClientProduct"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/lg/01.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/lg/1.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            @*<div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/lg/2.png" alt="slider2" class="img-responsive slider-img" id="slider-img1"></a>
+                            </div>*@
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/lg/3.png" alt="slider3" class="img-responsive slider-img" id="slider-img2"></a>
+                            </div>
+                        </div>
+
+                        <div class="loadeding"></div>
+                    </div>
+                    <div class="module sohomepage-slider slider-sm-img ">
+                        <div class="yt-content-slider" data-rtl="yes" data-autoplay="yes" data-autoheight="no" data-delay="11" data-speed="0.6" data-margin="0" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="no" data-pagination="yes" data-lazyload="no" data-loop="yes" data-hoverpause="no">
+                            <div class="yt-content-slide ">
+                                <a asp-action="GetProductsByOffers" asp-controller="ClientProduct"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/sm/01.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/sm/1.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/sm/2.png" alt="slider2" class="img-responsive slider-img" id="slider-img1"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/arabic/sm/3.png" alt="slider3" class="img-responsive slider-img" id="slider-img2"></a>
+                            </div>
+                        </div>
+
+                        <div class="loadeding"></div>
+                    </div>
+                }
+                else
+                {
+                    @* large slider img *@
+                    <div class="module sohomepage-slider slider-lg-img ">
+                        <div class="yt-content-slider" data-rtl="yes" data-autoplay="yes" data-autoheight="no" data-delay="11" data-speed="0.6" data-margin="0" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="no" data-pagination="yes" data-lazyload="no" data-loop="yes" data-hoverpause="no">
+                            <div class="yt-content-slide ">
+                                <a asp-action="GetProductsByOffers" asp-controller="ClientProduct"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/lg/01.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/lg/1.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/lg/2.png" alt="slider2" class="img-responsive slider-img" id="slider-img1"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/lg/3.png" alt="slider3" class="img-responsive slider-img" id="slider-img2"></a>
+                            </div>
+                        </div>
+
+                        <div class="loadeding"></div>
+                    </div>
+                    <div class="module sohomepage-slider slider-sm-img ">
+                        <div class="yt-content-slider" data-rtl="yes" data-autoplay="yes" data-autoheight="no" data-delay="11" data-speed="0.6" data-margin="0" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="no" data-pagination="yes" data-lazyload="no" data-loop="yes" data-hoverpause="no">
+                            <div class="yt-content-slide ">
+                                <a asp-action="GetProductsByOffers" asp-controller="ClientProduct"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/sm/01.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/sm/1.png" alt="slider1" class="img-responsive slider-img" id="slider-img0"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/sm/2.png" alt="slider2" class="img-responsive slider-img" id="slider-img1"></a>
+                            </div>
+                            <div class="yt-content-slide ">
+                                <a href="#"><img src="~/ClientTemplet/image/catalog/slideshow/baytonic slider/eng/sm/3.png" alt="slider3" class="img-responsive slider-img" id="slider-img2"></a>
+                            </div>
+                        </div>
+
+                        <div class="loadeding"></div>
+                    </div>
+                }
+
+                <div class="block-policy4">
+                    <div class="inner">
+                        <div class="policy policy1">
+                            <a title="free shipping on all orders"><span><i class="fa fa-truck"></i>@T["FastShippingAnyWhere"]</span></a>
+                        </div>
+                        <div class="policy policy2">
+                            <a title="money back guarantee"><span><i class="fa fa-usd"></i>@T["MoneyBackGuarantee"]</span></a>
+                        </div>
+                        <div class="policy policy3">
+                            <a title="LOWEST PRICE GUARANTEE"><span><i class="fa fa-calendar"></i>@T["LOWESTPRICEGUARANTEE"]</span></a>
+                        </div>
+                        <div class="policy policy4">
+                            <a title="online support 24/24"><span><i class="fa fa-umbrella"></i> @T["OnlineSupport24/7"]</span></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row box-content2">
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 box-left">
+
+                    <!-- #region Deals -->
+                    <div class="module deals-layout4">
+                        <h3 class="modtitle"><span>@T["Dealsoftheday"]</span></h3>
+                        <div class="modcontent">
+                            <div class="so-deal style2">
+                                <div class="extraslider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="yes" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="no" data-loop="yes" data-hoverpause="yes">
+                                    <!-- the begining of product view-->
+                                    @foreach (var item in Model.ProductsWithOffers)
+                                    {
+                                        <div class="item product-layout product-grid2">
+
+                                            <div class="product-thumb transition product-item-container">
+                                                <div class="left-block deals-left">
+                                                    <div class="product-image-container">
+                                                        <div class="image">
+                                                            <div class="box-label">
+                                                                <span class="label label-sale">-@(item.Price-item.Offer)</span>
+                                                            </div>
+                                                            <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id">
+                                                                <img src="@Url.Content(item.FirstImgUrl)" alt="Ground round enim" class="img-responsive">
+                                                            </a>
+
+                                                        </div>
+                                                        <!--quickview-->
+                                                        <div class="so-quickview">
+                                                            @*<a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>*@
+                                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg" asp-action="GetProductByIDQuickView" asp-controller="ClientProduct" asp-route-id="@item.Id" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+
+                                                        </div>
+                                                        <!--end quickview-->
+                                                    </div>
+                                                </div>
+                                                <div class="right-block deals-right">
+                                                    <div class="caption deals-caption">
+                                                        @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                                                        {
+                                                            <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id" target="_self" title="Ground round enim">@item.NameA</a></h4>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id" target="_self" title="Ground round enim">@item.NameE</a></h4>
+                                                        }
+                                                        <div class="rating">
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        </div>
+
+
+                                                        <p class="price">
+                                                            <span class="price-new">EGP @item.Offer</span>
+                                                            <span class="price-old">EGP @item.Price</span>
+                                                        </p>
+                                                        <div class="button-group">
+                                                            <button class="addToCart" title="Add to Cart" type="button" onclick="addToCart(@item.Id, '@item.NameE', '@item.NameA' , @item.Price,@item.Offer , '@item.FirstImgUrl', 1);">
+                                                                <i class="fa fa-shopping-cart"></i>  <span>@T["AddtoCart"]</span>
+                                                            </button>
+                                                            <button class="btn-button wishlist" type="button" title="Add to Wish List" onclick="AddToWishList(@item.Id)">
+                                                                <i class="fa fa-heart"></i><span>@T["AddtoWishList"]</span>
+                                                            </button>
+
+                                                        </div>
+                                                        <!--countdown box-->
+                                                        @*<div class="item-time-w">
+
+                                                                <div class="item-time">
+                                                                    <div class="item-timer">
+                                                                        <div class="defaultCountdown-30"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>*@
+                                                        <!--end countdown box-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- #endregion -->
+                <!--#endregion End Deals -->
+                <!-- #region featured products -->
+                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 extra-right">
+                    <div class="module so-extraslider-ltr ">
+                        <h3 class="modtitle"><span>@T["TopSellingproducts"]</span></h3>
+                        <div class="modcontent">
+                            <div class="so-extraslider">
+
+                                <div class="yt-content-slider extraslider-inner products-list" data-rtl="yes" data-pagination="no" data-autoplay="yes" data-delay="4" data-speed="0.6" data-margin="30" data-items_column0="4" data-items_column1="4" data-items_column2="3" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-lazyload="no" data-loop="yes" data-buttonpage="top">
+
+                                    <!-- #endregion featured products -->
+                                    <!-- #endregion featured products -->
+                                    <!-- #region  the beginning of product view-->
+                                    @foreach (var item in Model.TopSellerProducts)
+                                    {
+                                        <div class="item ">
+                                            <div class="product-layout product-grid2 style1">
+                                                <div class="product-thumb transition product-item-container">
+                                                    <div class="left-block">
+                                                        <div class="product-image-container">
+                                                            <div class="image">
+                                                                <div class="box-label">
+                                                                    @*<span class="label label-sale">-13%</span>*@
+                                                                </div>
+                                                                <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id">
+                                                                    <img src="@Url.Content(item.FirstImgUrl)" alt="Ground round enim" class="img-responsive ">
+                                                                </a>
+
+                                                            </div>
+                                                            <!--quickview-->
+                                                            <div class="so-quickview">
+                                                                @*      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>*@
+                                                                <a class="iframe-link btn-button quickview quickview_handler visible-lg" asp-action="GetProductByIDQuickView" asp-controller="ClientProduct" asp-route-id="@item.Id" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+
+                                                            </div>
+                                                            <!--end quickview-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="right-block">
+                                                        <div class="caption">
+                                                            @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                                                            {
+                                                                <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id" target="_self" title="Ground round enim">@item.NameA</a></h4>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.Id" target="_self" title="Ground round enim">@item.NameE</a></h4>
+
+                                                            }
+                                                            <div class="rating">
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            </div>
+
+
+                                                            <p class="price">
+                                                                <span class="price-new">EGP @item.Price</span>
+                                                                @*<span class="price-old">EGP 76.00</span>*@
+                                                            </p>
+                                                            <div class="button-group">
+                                                                <button class="addToCart" title="AddtoCart" type="button" onclick="addToCart(@item.Id, '@item.NameE', '@item.NameA' , @item.Price,@item.Offer , '@item.FirstImgUrl', 1);">
+                                                                    <i class="fa fa-shopping-cart"></i>  <span>@T["AddtoCart"]</span>
+                                                                </button>
+                                                                <button class="btn-button wishlist" type="button" title="Add to Wish List" onclick="AddToWishList(@item.Id)">
+                                                                    <i class="fa fa-heart"></i><span>@T["AddtoWishList"]</span>
+                                                                </button>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #endregion -->
+            <!-- #endregion the beginning of product view -->
+            <!-- #region  Top collections-->
+            @*<div class="so-categories custom-slidercates module clearfix">
+                <h3 class="modtitle"><span>@T["Topcollections"]</span></h3>
+                <div class="modcontent">
+                    <div class="cat-wrap theme3 font-title yt-content-slider" data-rtl="yes" data-autoplay="yes" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column0="5" data-items_column1="4" data-items_column2="3" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="no" data-loop="yes" data-hoverpause="yes">
+                        @foreach (var item in Model.TopCategories)
+                        {
+                            <div class="content-box">
+                                <div class="image-cat">
+                                    <a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-catId="@item.Id">
+                                        <img src="@Url.Content(item.ImgUrl)" title="@item.NameE" alt="@item.NameE" />
+                                    </a>
+                                </div>
+
+                                <div class="cat-title">
+                                    @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                                    {
+                                        <a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-catId="@item.Id" title="@item.NameA " target="_self"> @item.NameA</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-catId="@item.Id" title="@item.NameE " target="_self"> @item.NameE</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>*@
+            <!-- #endregion -->
+            <!-- #endregion Top collections -->
+            <!-- #region SmartPhones short category -->
+            @foreach (var item in Model.ShowInHomeCategories)
+            {
+                <div class="module so-extraslider-ltr extra-layout4 cus1">
+                    <div class="form-group col-pre">
+                        @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                        {
+                            <div class="m-head">@item.NameA<a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@item.Id">@T["عرض الكل"]</a></div>
+                        }
+                        else
+                        {
+                            <div class="m-head">@item.NameE<a asp-action="GetProductsByCategoryID" asp-controller="ClientProduct" asp-route-id="@item.Id">@T["View All"]</a></div>
+                        }
+                    </div>
+                    <div class="modcontent">
+                        <div class="so-extraslider">
+                            <div class="yt-content-slider extraslider-inner products-list" data-rtl="yes" data-pagination="no" data-autoplay="yes" data-delay="4" data-speed="0.6" data-margin="30" data-items_column0="6" data-items_column1="3" data-items_column2="2" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-lazyload="no" data-loop="yes" data-buttonpage="top">
+                                @foreach (var product in item.Products)
+                                {
+                                    <div class="item ">
+                                        <div class="product-layout product-grid2 style1">
+                                            <div class="product-thumb transition product-item-container">
+                                                <div class="left-block">
+                                                    <div class="product-image-container">
+                                                        <div class="image">
+                                                            @if (product.Offer > 0)
+                                                            {
+                                                                int presentage = (int)((product.Offer / product.Price) * 100) - 100;
+                                                                <div class="box-label">
+                                                                    <span class="label label-sale">@presentage %</span>
+                                                                </div>
+                                                            }
+
+                                                            <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@product.Id" title="product">
+                                                                <img src="@Url.Content(product.FirstImgUrl)" alt="@product.NameE" class="img-responsive">
+                                                            </a>
+
+                                                        </div>
+                                                        <!--quickview-->
+                                                        <div class="so-quickview">
+                                                            @* <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>*@
+                                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg" asp-action="GetProductByIDQuickView" asp-controller="ClientProduct" asp-route-id="@product.Id" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>@T["Quickview"]</span></a>
+
+                                                        </div>
+                                                        <!--end quickview-->
+                                                    </div>
+                                                </div>
+                                                <div class="right-block">
+                                                    <div class="caption">
+                                                        @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                                                        {
+                                                            <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@product.Id" target="_self" title="@product.NameA">@product.NameA</a></h4>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h4><a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@product.Id" target="_self" title="@product.NameE">@product.NameE</a></h4>
+                                                        }
+                                                        <div class="rating">
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        </div>
+
+
+                                                        <p class="price">
+                                                            @if (product.Offer > 0)
+                                                            {
+                                                                <span class="price-new">EGP @product.Offer</span>
+                                                                <span class="price-old">EGP @product.Price</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="price-new">EGP @product.Price</span>
+
+                                                            }
+
+                                                        </p>
+                                                        <div class="button-group">
+                                                            <button class="addToCart" title="Add to Cart" type="button" onclick="addToCart(@product.Id, '@product.NameE', '@product.NameA' , @product.Price,@product.Offer , '@product.FirstImgUrl', 1);">
+                                                                <i class="fa fa-shopping-cart"></i>  <span>@T["AddtoCart"]</span>
+                                                            </button>
+                                                            <button class="btn-button wishlist" type="button" title="Add to Wish List" onclick="AddToWishList(@product.Id);">
+                                                                <i class="fa fa-heart"></i><span>@T["AddtoWishList"]</span>
+                                                            </button>
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <!-- #endregion -->
+            <!-- #region Slider brands -->
+            <!--  <div class="slider-brands clearfix">
+                <div class="yt-content-slider contentslider" data-rtl="no" data-loop="yes" data-autoplay="no" data-autoheight="no" data-autowidth="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column0="7" data-items_column1="6" data-items_column2="3" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-hoverpause="yes">
+                    <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand1.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand2.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand3.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand4.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand5.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand6.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand7.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand8.jpg" alt="brand"></a>
+                     </div>
+                     <div class="item">
+                     <a href="#"><img src="image/catalog/brands/id4-brand5.jpg" alt="brand"></a>
+                     </div>
+                </div>
+            </div> -->
+            <!-- #endregion -->
+            <!-- #endregion Slider brands-->
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @*<script type="text/javascript">
+        // Check if Cookie exists
+        view = 'grid';
+        if ($.cookie('display')) {
+            view = $.cookie('display');
+        } else {
+            view = 'grid';
+        }
+        if (view) display(view);
+        //--></script>*@
+
+    <script>
+        function GetCategoryProducts(catId) {
+
+            if (catId && catId != '') {
+                $.ajax({
+                    url: '@Url.Action("GetProductsByCategoryID","ClientProduct")',
+                    type: 'GET',
+                    cache: false,
+                    data: { catId: catId }
+                }).done(function (result) {
+
+                    $('#productsContainer').html(result);
+                });
+            }
+        }
+    </script>
+}
+<!-- //Main Container -->

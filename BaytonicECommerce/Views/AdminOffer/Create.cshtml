@@ -1,0 +1,125 @@
+﻿@model Product_OfferVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h5 style="color:gray">Product-Offer</h5>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="SysOffer">Product-Offer</a></li>
+                        <li class="breadcrumb-item active">Add New Product-Offer</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-info" style="margin:10px">
+        <div class="card-header">
+            <h3 class="card-title">New Product-Offer</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal" asp-controller="AdminOffer" method="post" asp-action="Create">
+            <div class="card-body">
+                <div class="form-group row">
+                    @*@Html.LabelFor(x => Model.product.Id, htmlAttributes: new { @class = "col-sm-2 col-form-label" })*@
+                    <label class="col-sm-2 col-form-label">Product </label>
+                    <div class="col-sm-10">
+                        
+                        @Html.DropDownListFor(x => Model.product.Id, new SelectList(Model.Products, "Id", "NameE"),"select product", htmlAttributes: new { @class = "form-control", id = "product_Id" })
+                                          
+    @*<input asp-for="ProductId" class="form-control" placeholder="Product ID" required>*@
+                    </div>
+                    <span asp-validation-for="product.Id" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Old Price</label>
+                    <div class="col-sm-10">
+                        <input id="oldPrice" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">persentage </label>
+                    <div class="col-sm-9">
+                        <input type="number" id="offerPersentage" onchange="persentagechange()" class="form-control" max="100" min="0" placeholder="Offer Persentage From 1-100 ">
+                    </div>
+                    <label class="col-sm-1 col-form-label">% </label>
+                    @*<span asp-validation-for="product.Offer" class="text-danger"></span>*@
+                </div>
+                <div class="form-group row">
+                    <label asp-for="product.Offer" class="col-sm-2 col-form-label">New Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="offerNewPrice" asp-for="product.Offer" class="form-control" placeholder="New Price" readonly required>
+                    </div>
+                    
+                </div>
+
+
+                @*<div class="form-group row">
+            <div class="custom-control custom-checkbox">
+                <input asp-for="Offer.IsActive" class="custom-control-input" type="checkbox" style="margin-right:10px">
+                <label asp-for="Offer.IsActive" class="custom-control-label">Available</label>
+                <span asp-validation-for="Offer.IsActive" class="text-danger"></span>
+            </div>
+
+        </div>*@
+            </div>
+
+            @*<div class="form-group row">
+                    <label asp-for="product.Isactive" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="product.Isactive" type="checkbox" class="form-control">
+                    </div>
+                    <span asp-validation-for="product.Isactive" class="text-danger"></span>
+                </div>*@
+
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-info"> <i class="far fa-save mr-1"></i> Save</button>
+                <a asp-action="Index" asp-controller="AdminOffer" class="btn btn-default float-right">Cancel</a>
+            </div>
+
+            <!-- /.card-footer -->
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $('#product_Id').on('change', function () {
+            
+            var productId= $("#product_Id option:selected").val();
+        $.ajax({
+            url: '@Url.Action("GetProductPrice", "AdminOffer")',
+            type: 'GET',
+            cache: false,
+           data: { id: productId}
+        }).done(function (result) {
+            console.log(result);
+
+            $('#oldPrice').val(result);
+        });
+    });
+    function persentagechange()
+    {
+        var persentage = document.getElementById('offerPersentage').value;
+        var oldPrice = document.getElementById('oldPrice').value;
+        console.log(persentage);
+        console.log(oldPrice);
+        if (persentage > 0 && persentage<100)  {
+            document.getElementById('offerNewPrice').value = (oldPrice - ((persentage / 100) * oldPrice));
+        }
+    }
+    </script>
+   
+}
+
+

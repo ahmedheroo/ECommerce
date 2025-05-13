@@ -1,0 +1,88 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+@model IEnumerable<WishList>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td class="text-center">@T["ProductImage"]</td>
+            <td class="text-center">@T["productName"]</td>
+            <td class="text-center">@T["Category"]</td>
+            <td class="text-center">@T["Stock"]</td>
+            <td class="text-center">@T["UnitPrice"]</td>
+            <td class="text-center">@T["Action"]</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() <= 0)
+        {
+            <tr class="text-center">
+                <td>@T["NoProductInYourWishList"]</td>
+            </tr>
+        }
+        else 
+        { 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.ProductId">
+                        <img width="70px" src="@Url.Content(item.ImgUrl)" alt="" title="">
+                    </a>
+                </td>
+                <td class="text-left">
+                    @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                    {
+                        <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.ProductId">@item.Product.NameA</a>
+                    }
+                    else
+                    {
+                        <a asp-action="GetProductDetails" asp-controller="ClientProduct" asp-route-id="@item.ProductId">@item.Product.NameE</a>
+                    }
+                </td>
+                @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                {
+                    <td class="text-left">@item.Product.Category.NameA</td>
+                }
+                else
+                {
+                    <td class="text-left">@item.Product.Category.NameE</td>
+                }                @if (item.Product.IsActive)
+                {
+                    <td class="text-right">@T["Avilable"]</td>
+                }
+                else
+                {
+                    <td class="text-right danger">@T["Unavilable"]</td>
+                }
+
+                @if (item.Product.Offer > 0)
+                {
+                    <td class="text-right">
+                        <div class="price"> <span class="price-new">@item.Product.Offer</span> <span class="price-old">@item.Product.Price</span></div>
+
+                    </td>
+                }
+                else
+                {
+                    <td class="text-right">
+                        <div class="price"> <span class="price-new" itemprop="price">@item.Product.Price  @T["EGP"]</span></div>
+                    </td>
+
+                }
+
+                <td class="text-right">
+                    <button class="btn btn-primary"
+                            title="" data-toggle="tooltip"
+                            onclick="addToCart(@item.ProductId, '@item.Product.NameE', '@item.Product.NameA' , @item.Product.Price,@item.Product.Offer , '@item.Product.FirstImgUrl', 1)"
+                            type="button" data-original-title="Add to Cart">
+                        <i class="fa fa-shopping-cart"></i>
+                    </button>
+                    <a class="btn btn-danger" onclick="DeleteWishListItem(@item.Id)"><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>

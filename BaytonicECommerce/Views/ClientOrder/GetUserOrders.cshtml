@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "GetUserOrders";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div id="wrapper" class="wrapper-fluid banners-effect-5">
+
+
+    <!-- Header Container  -->
+    <!-- //Header Container  -->
+    <!-- Main Container  -->
+    <div class="main-container container">
+        <ul class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">@T["OrderHistory"]</a></li>
+        </ul>
+
+        <div class="row">
+            <!--Middle Part Start-->
+            <div id="content" class="col-sm-12">
+                <h2 class="title">@T["OrderHistory"]</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td class="text-center">@T["OrderID"]</td>
+                                <td class="text-center">@T["ItemsQTY"]</td>
+                                <td class="text-center">@T["Status"]</td>
+                                <td class="text-center">@T["DateAdded"]</td>
+                                <td class="text-center">@T["ExpectedDelivaryDate"]</td>
+                                <td class="text-right">@T["Total"]</td>
+         <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td class="text-center">@item.Id</td>
+                                <td class="text-center">@item.OrderProducts.Count()</td>
+                                <td class="text-center">@item.Status</td>
+                                <td class="text-center">@item.OrderDate.ToShortDateString()</td>
+                                <td class="text-right">@item.DeliveryDate.ToShortDateString()</td>
+                                <td class="text-right">@(item.TotalPrice - item.DicountValue)</td>
+                                <td class="text-center">
+                                    <a asp-action="GetOrderDetails" asp-controller="ClientOrder" asp-route-Id="@item.Id" class="btn btn-yellow" title="" data-toggle="tooltip"  data-original-title="View"><i class="fa fa-eye"></i></a>
+                                </td>
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--Middle Part End-->
+            <!--Right Part Start -->
+         
+            <!--Right Part End -->
+        </div>
+    </div>
+    <!-- //Main Container -->
+    <!-- Footer Container -->
+    <!-- //end Footer Container -->
+
+</div>
+
+
+<!-- Include Libs & Plugins
+    ============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="js/themejs/libs.js"></script>
+<script type="text/javascript" src="js/unveil/jquery.unveil.js"></script>
+<script type="text/javascript" src="js/countdown/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+<script type="text/javascript" src="js/datetimepicker/moment.js"></script>
+<script type="text/javascript" src="js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
+
+
+<!-- Theme files
+============================================ -->
+
+
+<script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
+<script type="text/javascript" src="js/themejs/addtocart.js"></script>
+<script type="text/javascript" src="js/themejs/application.js"></script>
+

@@ -1,0 +1,94 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "ContactUS";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div class="main-container container">
+    <ul class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i></a></li>
+        <li><a href="#">Page</a></li>
+        <li><a href="#">@T["Wholesale"]</a></li>
+    </ul>
+
+    <div class="row">
+        <div id="content" class="col-sm-12">
+            <div class="page-title">
+                <br>
+                <h2>@T["Wholesale"]</h2>
+            </div>
+
+
+            <div class="info-contact clearfix">
+                @*<div class="col-lg-4 col-sm-4 col-xs-12 info-store">
+                    <div class="row">
+                        <div class="name-store">
+                            <h3>Your Store</h3>
+                        </div>
+                        <address>
+                            <div class="address clearfix form-group">
+                                <div class="icon">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <div class="text">My Company, 42 avenue des Champs Elysées 75000 Paris France</div>
+                            </div>
+                            <div class="phone form-group">
+                                <div class="icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="text">Phone : 0123456789</div>
+                            </div>
+                            <div class="comment">
+                                Maecenas euismod felis et purus consectetur, quis fermentum velition. Aenean egestas quis turpis vehicula.Maecenas euismod felis et purus consectetur, quis fermentum velition.
+                                Aenean egestas quis turpis vehicula.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                                The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+                            </div>
+                        </address>
+                    </div>
+                </div>*@
+                <div class="col-lg-11 col-sm-12 col-xs-12 contact-form">
+                    <form asp-action="CreateMessage" asp-controller="Home" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <fieldset>
+                            <legend>@*Contact Form*@</legend>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" asp-for="@Model.SenderName" >@T["YourName"]</label>
+                                <div class="col-sm-10">
+                                    <input asp-for="@Model.SenderName" type="text" class="form-control" required>
+                                    <span asp-validation-for="@Model.SenderName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" asp-for="@Model.Email">@T["E-Mail"]</label>
+                                <div class="col-sm-10">
+                                    <input asp-for="@Model.Email" type="text" class="form-control" required>
+                                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" asp-for="@Model.Subject">@T["phone"]</label>
+                                <div class="col-sm-10">
+                                    <input asp-for="@Model.Subject" type="text" class="form-control" required>
+                                    <span asp-validation-for="@Model.Subject" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" asp-for="@Model.Message1">@T["Enquiry"]</label>
+                                <div class="col-sm-10">
+                                    <textarea asp-for="@Model.Message1" rows="10" class="form-control" required></textarea>
+                                    <span asp-validation-for="@Model.Message1" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="buttons">
+                            <div class="pull-right">
+                                <button class="btn btn-default buttonGray" type="submit">
+                                    <span>@T["Submit"]</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

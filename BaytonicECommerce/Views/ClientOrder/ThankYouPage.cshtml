@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "ThankYouPage";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+
+<div id="wrapper" class="wrapper-fluid banners-effect-5 marg-b-5">
+
+    <!-- Main Container  -->
+    <div class="main-container container">
+        <ul class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">@T["OrderDone"]</a></li>
+        </ul>
+
+        <div class="row">
+            <div id="content" class="col-sm-12">
+                <!--Middle Part Start-->
+                <div id="isCart" class="col-sm-12 " style="display:none">
+                    <h2 class="title">@T["OrderDone"]</h2>
+
+                </div>
+                <div class="col-sm-12 text-center">
+                    <img width="300px" height="300px" src="~/ClientTemplet/image/BaytonicImgs/Like.png" />
+                    <h3>@T["ThanksCont"] <a style="color: #ffb600" asp-action="GetUserOrders" asp-controller="ClientOrder">@T["TraceYourOrder"]</a>  </h3>
+                </div>
+            </div>
+            <!--Middle Part End -->
+        </div>
+    </div>
+    <!-- //Main Container -->
+
+
+</div>
+
+

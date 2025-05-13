@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WishList>
+@{
+    ViewData["Title"] = "GetUserWishList";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+
+<div id="wrapper" class="wrapper-fluid banners-effect-5">
+
+
+
+
+    <!-- Main Container  -->
+    <div class="main-container container">
+        <ul class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">@T["WishList"]</a></li>
+        </ul>
+
+        <div class="row">
+            <!--Middle Part Start-->
+            <div id="content" class="col-sm-12">
+                <h2 class="title">@T["WishList"]</h2>
+                <div id="WishListDetailsDv" class="table-responsive">
+                    <partial name="_GetUserWishListDetails" model="Model"/>
+                </div>
+            </div>
+
+            <!--Middle Part End-->
+        </div>
+    </div>
+    <!-- //Main Container -->
+
+
+</div>
+
+@section Scripts{ 
+    <script>
+        function AddToCart(productId) {
+
+            if (productId && productId != '') {
+                $.ajax({
+                    url: '@Url.Action("AddCartItem", "ClientCart")',
+                    type: 'POST',
+                    cache: false,
+                    data: { productId: productId }
+                }).done(function (result) {
+
+                });
+            }
+        }
+        function DeleteWishListItem(wishListId) {
+
+            if (wishListId && wishListId != '') {
+                $.ajax({
+                    url: '@Url.Action("DeleteWishListItem", "ClientWishList")',
+                    type: 'POST',
+                    cache: false,
+                    data: { wishListId: wishListId }
+                }).done(function (result) {
+                    $('#WishListDetailsDv').html(result);
+                });
+            }
+        }
+    </script>
+}

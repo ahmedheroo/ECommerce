@@ -1,0 +1,171 @@
+ 
+    body, html {
+      height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+.bg-img {
+  background-image: url(~/ClientTemplet/image/catalog/banners/banner10.jpg);
+  min-height: 610px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.container {
+  position: absolute;
+  right: 0;
+  margin: 25px !important;
+  max-width: 400px !important;
+  padding: 22px !important;
+  background-color: white;
+}
+
+    .btn{
+      background-color: #1089cf;
+      color: white;
+      padding: 8px 10px;
+      border: none;
+      cursor: pointer;
+      width: 80%;
+      opacity: 0.9;
+      margin-left: 22px;
+      /* height:  !important; */
+    }
+    
+    .btn:hover {
+        box-shadow:  0 0 5px #fff, 0 0 5px #fff, 0 0 5px #1089cf, 0 0 6px #1089cf, 0 0 10px #1089cf;
+        color: white;
+    }
+     
+    .removeborders{
+      border-top: none;
+      border-left: none;
+      border-right: none;
+  }
+  .Logcontainer{
+      display: flexbox;
+      flex-direction: row;
+      flex-wrap: wrap;
+       padding: 19px; 
+  }
+ 
+.field {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 0.1em;
+  }
+  
+  .reglabel, .reginput {
+    transition: all 0.2s;
+    touch-action: manipulation;
+  }
+  .reginput{
+      width: 100%;
+  }
+  .reglabel{
+      font-size: 0.7em;
+      color: rgb(139, 138, 138);
+  }
+  .reginput:focus ~ .reglabel {  color:rgb(7, 101, 243);font-size: 0.9em; }
+  
+     
+  
+  .reginput:focus {
+    outline: 0;
+    border-bottom: 3px solid rgb(7, 101, 243);
+  }
+ 
+  .reginput:placeholder-shown + .reglabel {
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(0, 2.125rem) scale(1.5);
+  }
+ 
+  ::-webkit-input-placeholder {
+    opacity: 0;
+    transition: inherit;
+  }
+ 
+  .reginput:not(:placeholder-shown) + .reglabel,
+  .reginput:focus + .reglabel {
+    transform: translate(0, 0) scale(1);
+    cursor: pointer;
+  }
+
+ 
+#seprator {
+  display: flex;
+  flex-direction: row;
+  color: rgb(102, 100, 100);
+  font-size: small;
+  margin-bottom:13px;
+  margin-top:-14px;
+}
+
+#seprator:before, #seprator:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1.5px solid rgb(196, 190, 190);
+  margin: auto;
+}
+
+.vl {
+  border-left: 2px solid rgb(208, 209, 208);
+  border-radius: 10px;
+  height: 40px;
+  margin-top: 10px;
+}
+ 
+.login-with-google-btn {
+  transition: background-color .3s, box-shadow .3s;
+  height: 50px;
+  width: 50px;
+  padding: 12px 12px 12px 20px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  color: #757575;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 16px 16px;
+}
+
+.login-with-google-btn:hover {
+  box-shadow: 0 4px 5px 0 rgba(40,149,212, 0.2), 0 6px 15px 0 rgba(40,149,212, 0.19);
+}
+
+.login-with-facebook-btn {
+  transition: background-color .3s, box-shadow .3s;
+  height: 50px;
+  width: 50px;
+  padding: 12px 12px 12px 20px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  color: #2895d4;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  background-image: url(facebook-round-color.svg);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 1px 1px;
+}
+
+  .login-with-facebook-btn:hover {
+    box-shadow: 0 4px 5px 0 rgba(40,149,212, 0.2), 0 6px 15px 0 rgba(40,149,212, 0.19);
+  }

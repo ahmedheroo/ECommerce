@@ -1,0 +1,24 @@
+﻿@{ 
+    @*Layout = "/Areas/Identity/Pages/_Layout.cshtml";*@
+ViewData["Title"] = "GetProductDetails";
+Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<h2 style="margin-top:15px ; text-align:center ">Manage your account</h2>
+
+<div>
+    <h4 style=" text-align:center ">Change your account settings</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

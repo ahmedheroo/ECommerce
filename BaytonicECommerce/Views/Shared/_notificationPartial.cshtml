@@ -1,0 +1,35 @@
+﻿
+<script>
+    var msg = @(TempData["Message"]!=null? Html.Raw(TempData["Message"]) : Html.Raw("undefined"));
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    if (msg) {
+        if (msg.provider == "sweetAlert") {
+            swal.fire({
+                title: msg.title,
+                text: msg.message,
+                icon: msg.icon
+            });
+        } else {
+            toastr[msg.type](msg.message, msg.title);
+        }
+    }
+</script>
+

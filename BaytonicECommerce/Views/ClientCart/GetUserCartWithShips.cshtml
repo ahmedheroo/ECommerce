@@ -1,0 +1,348 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+@model Cart_ShipsVM
+@{
+    ViewData["Title"] = "GetUserCartWithShips";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div id="wrapper" class="wrapper-fluid banners-effect-5">
+
+
+
+    <form id="mainForm">
+        <!-- Main Container  -->
+        <div class="main-container container">
+            <ul class="breadcrumb">
+                <li><a href="#"><i class="fa fa-home"></i></a></li>
+                <li><a href="#">@T["Checkout"]</a></li>
+
+            </ul>
+
+            <div class="row">
+                <!--Middle Part Start-->
+                <div id="content" class="col-sm-12">
+                    <h2 class="title">@T["Checkout"]</h2>
+                    <div class="so-onepagecheckout row">
+
+
+
+                        <div class="col-sm-12">
+
+                            <!-- Shopping Cart Start -->
+                            <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="check-header panel-title"><i class="fa fa-shopping-cart"></i> @T["ShoppingCart"]</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="text-left">@T["ProductImage"]</td>
+                                                        <td class="text-left">@T["productName"]</td>
+                                                        <td class="text-right">@T["Quantity"]</td>
+                                                        <td class="text-right">@T["UnitPrice"]</td>
+                                                        <td class="text-right">@T["Total"]</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="cartTableBody">
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>                         
+                            <!-- Shopping Cart End -->
+                            <!-- Voacher Start -->
+                            <div class="row">
+                                <div class="col-sm-6 ">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title check-header"><i class="fa fa-mobile"></i> @T["Phone1"]</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group required">
+                                                <input type="text" class="form-control" id="paymentPhone" placeholder="@T["Phone1"]" value="" name="Phone" required>
+                                            </div>
+                                        </div>
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title check-header"><i class="fa fa-ticket"></i> @T["DoyouHaveACouponOrVoucher"]</h4>
+                                        </div>
+                                        <div class="panel-body row" @*style="height :177px"*@>
+                                            <!-- <div class="col-sm-6 marg-t-1">
+        <div class="input-group">
+          <input type="text" class="form-control" id="input-coupon" placeholder="Enter your coupon here" value="" name="coupon">
+          <span class="input-group-btn">
+          <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-coupon" value="Apply Coupon">
+          </span></div>
+        </div> -->
+
+                                            <div class="col-sm-12">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="Coupon" placeholder="@T["Enteryourgiftvouchercodehere"]" name="voucher">
+                                                    <span class="input-group-btn">
+                                                        <input type="button" onclick="checkCoupon()" class="btn btn-primary btn-yellow" data-loading-text="Loading..." id="button-voucher" value="@T["ApplyVoucher"]">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                <!-- Voacher End -->
+                                <!-- Address PNL Start -->
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading ">
+                                            <h4 class="panel-title check-header"><i class="fa fa-book"></i>@T["YourAddress"]</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <fieldset id="address" class="required">
+                                                <div class="form-group required">
+                                                    <label for="input-payment-zone" class="control-label">@T["Government"]</label>
+                                                    <select onchange="getShippingPrice()" class="form-control" id="Shipping" asp-items="Model.Governments" name="zone_id" required>
+                                                        <option value="">@T["---PleaseSelect---"]  </option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group required">
+                                                    <label for="input-payment-address-1" class="control-label">@T["Address"]</label>
+                                                    <input type="text" class="form-control" id="paymentAddres" placeholder="@T["Address"]" value="" name="address_1" required>
+                                                </div>
+                                                @*<div class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked="checked" value="1" name="shipping_address">
+                                   @T["MyDeliveryAndBillingAddressesAreTheSame"]
+                                </label>
+                            </div>*@
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Address PNL End -->
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-12 col-md-6 invoice">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title check-header"><i class="fa fa-money"></i>@T["TotalBill"]</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td class="text-right" colspan="4"><strong>@T["Sub-Total"]</strong></td>
+                                                                <td id="subTotaltd" class="text-right"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right" colspan="4"><strong>@T["FlatShippingRate"]</strong></td>
+                                                                <td id="shippingtd" class="text-right">0.0EGP</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right" colspan="4"><strong>@T["Discount"]</strong></td>
+                                                                <td id="discounttd" class="text-right">0.0 @T["EGP"]</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right" colspan="4"><strong>@T["VAT(20%)"]</strong></td>
+                                                                <td class="text-right"><s>20.0</s> 0.0 @T["EGP"]</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right" colspan="4"><strong>@T["Total"]</strong></td>
+                                                                <td id="Totaltd" class="text-right"></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Payment Method Start -->
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="panel panel-default no-padding" style="min-height: 270px;">
+                                            
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title check-header"><i class="fa fa-credit-card"></i>@T["PaymentMethod:"]</h4>
+                                            </div>
+                                            <div class="panel-body">
+
+                                                <p>@T["PleaseSelectThePreferredPaymentMethodToUseOnThisOrder"]</p>
+                                                <div class="radio">
+                                                    <input class="payment-radio" type="radio" checked="checked" name="Cash On Delivery">
+                                                    <label style="margin-right :20px">
+                                                        @T["CashOnDelivery"]
+                                                    </label>
+                                                </div>
+
+                                                @*<div class="radio">
+                                                    <label>
+                                                        <input type="radio" class="payment-radio" name="Paypal">Online Payment
+                                                    </label>
+                                                </div>*@
+                                                <br>
+                                                <br>
+
+                                                <label class="control-label" for="confirm_agree">
+                                                    <input type="checkbox" checked="checked" value="1" required="" class="validate required" id="confirm_agree" readonly name="confirm agree">
+                                                    <span>@T["IHaveReadAndAgreeToThe"] <a class="incon agree iframe-link btn-button quickview quickview_handler " asp-action="Policy" asp-controller="Home" title="Quick view" data-fancybox-type="iframe"><b>@T["Terms&Conditions"]</b></a></span>
+                                                </label>
+                                                <div class="buttons confirm-order">
+                                                    <div class="pull-right">
+                                                        <input type="button" onclick="addOrder()" class="btn btn-primary btn-yellow" id="button-confirm" value="@T["ConfirmOrder"]">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- Payment Method End -->
+                                <!-- Comment Method End -->
+                                <!-- <div class="col-sm-12 col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title"><i class="fa fa-pencil"></i> Add Comments About Your Order</h4>
+            </div>
+              <div class="panel-body">
+
+                <br>
+
+              </div>
+          </div>
+        </div> -->
+                                <!-- Comment Method End -->
+
+
+                            </div>
+                        </div>
+                </div>
+                <!--Middle Part End -->
+
+            </div>
+        </div>
+        <!-- //Main Container -->
+
+    </form>
+</div>
+@section Scripts{
+    <script>
+            window.onload = function () {
+                let cart = [];
+                if (localStorage.getItem('cart')) {
+                    cart = JSON.parse(localStorage.getItem('cart'));
+                    var cartnumber = document.getElementById("cartnumber");
+                    cartnumber.innerText = cart.length;
+
+                    addTableCheckout();
+                }
+            };
+
+        function addOrder() {
+            var governId = $('#Shipping').val();
+            var Discount = $('#paymentPhone').val();
+            var filter = /[1-9]{1}[0-9]{9}/;
+            if (governId > 0 && filter.test(Discount) && $('#paymentAddres').val() != null && $('#paymentAddres').val() != '') {
+
+                
+                var Coupon = $('#Coupon').val();
+                var paymentAddress = $('#paymentAddres').val();
+
+                // $("#mainForm").validate();
+
+                console.log("new");
+                //let cart = [];
+                //    cart = JSON.parse(localStorage.getItem('cart'));
+
+                let jsonText = localStorage.getItem('cart');
+                $.ajax({
+                    url: '@Url.Action("CreateNewOrder", "ClientOrder")',
+                    type: 'POST',
+                    cache: false,
+                    data: { JsonCart: jsonText, GovId: governId, Address: paymentAddress, Coupon: Coupon, Discount: Discount }
+                }).done(function (result) {
+                    localStorage.clear();
+                    window.location.href = '/Purchase';
+                    //$('#cartTableDv').html(result);
+                });
+            }
+            else if (!filter.test(Discount)) {
+                addProductNotice('Please ,enter your mobile number', '', '', 'success');
+                $('#jGrowl').css({ 'color': 'red' });
+            }
+            else {
+                addProductNotice('Please ,Select your Government and fill all required fields', '', '', 'success');
+                $('#jGrowl').css({ 'color': 'red' });
+            }
+        }
+         function checkCoupon() {
+            var coupon = $('#Coupon').val();
+             let jsonText = localStorage.getItem('cart');
+             var pricestr = document.getElementById("subTotaltd").innerText;
+             var price = pricestr.substr(0, pricestr.indexOf(' '));
+                $.ajax({
+                    url: '@Url.Action("CheckCoupon", "ClientOrder")',
+                    type: 'POST',
+                    cache: false,
+                    data: { JsonCart: jsonText, Coupon: coupon, OrderPrice: price }
+                }).done(function (result) {
+                    if (result > 0) {
+
+                        addProductNotice('coupon added to your order', '', '', 'success');
+                        $('#jGrowl').css({ 'color': '#0b601b' });
+                        document.getElementById("discounttd").innerText = result + ' EGP';
+                        var str = document.getElementById("Totaltd").innerText;
+                        var oldTotal = str.substr(0, str.indexOf(' '));
+                        document.getElementById("Totaltd").innerText = (Number(oldTotal) - Number(result) + ' EGP');
+                    }
+                    else if (result < 0 && result!=-5) {
+                        addProductNotice('Sorry This Coupon Unavilable For You ', '', '', 'success');
+                        $('#jGrowl').css({ 'color': 'red' });
+                    }
+                    else if (result == -5) {
+                        addProductNotice('Sorry your order dont meet coupon Limit', '', '', 'success');
+                        $('#jGrowl').css({ 'color': 'red' });
+                    }
+                    else
+                    {
+                        addProductNotice('Please ,this coupon Code not found', '', '', 'success');
+                        $('#jGrowl').css({ 'color': 'red' });
+                    }
+                });
+
+        }
+         function getShippingPrice() {
+             var governId = $('#Shipping').val();
+                $.ajax({
+                    url: '@Url.Action("GetGovShippingPrice", "ClientCart")',
+                    type: 'POST',
+                    cache: false,
+                    data: { govId: governId  }
+                }).done(function (result) {
+                    if (result >= 0) {
+                        document.getElementById("shippingtd").innerText = result + ' EGP';
+                        var str = document.getElementById("subTotaltd").innerText ;
+                        var oldTotal = str.substr(0, str.indexOf(' '));
+                        var strDis = document.getElementById("discounttd").innerText;
+                        var discount = strDis.substr(0, str.indexOf(' '));
+                        document.getElementById("Totaltd").innerText = (Number(oldTotal) + Number(result) - Number(discount)) + ' EGP';
+                    }
+                    else {
+                        addProductNotice('Unavilable Government', '', '', 'success');
+                        $('#jGrowl').css({ 'color': 'red' });
+                    }
+                });
+
+        }
+
+    </script>
+
+
+}

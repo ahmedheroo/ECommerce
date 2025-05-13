@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model IEnumerable<Product>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3 style="color:gray">Offers</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Offers</li>
+
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <div class="card">
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="input-group input-group-lg">
+                                        <input type="search" id="btnSearch" class="form-control form-control-sm" placeholder="Type your keywords here">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-sm btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a asp-action="Create" asp-controller="AdminOffer" type="button" class="btn btn-info float-right btn-sm"> <i class="fas fa-plus"></i> New</a>
+
+                                    <table id="example1" class="table table-bordered  table-striped mt-3">
+                                        <thead class="table-primary">
+                                            <tr>
+                                                <th>Product English Name</th>
+                                                <th>Product Arabic Name</th>
+                                                <th>Old Price</th>
+                                                <th>Offer % </th>
+                                                <th>New Price</th>
+                                                <th>#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblProduct" class="table-sm">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.NameE</td>
+                                                    <td>@item.NameA</td>
+                                                    <td>@item.Price</td>
+                                                    <td>@(100-((item.Offer * 100) /item.Price))  %</td>
+                                                    <td>@item.Offer</td>
+                                                    <td>
+
+                                                        <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu" style="">
+                                                            <a asp-controller="AdminOffer" asp-action="Edit" asp-route-id="@item.Id" class=" nav-link" tabindex="-1"><i class="fas fa-edit"></i> Edit</a>
+                                                            <a asp-action="Delete" asp-controller="AdminOffer" asp-route-id="@item.Id"class="nav-link" tabindex="-1" style="color:red"> <i class="far fa-trash-alt"></i> Delete</a>
+
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</section>
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false, "searching": false,
+                buttons: [{
+                    extend: 'excel',
+                    text: ' Export',
+                    title: 'All Products',
+                    className: 'btn btn-sm mr-1',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                }, {
+                        extend: 'print',
+                        text: 'print',
+                        title: 'All Products',
+                        className: 'btn btn-sm mr-1',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        }
+                    }],
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        $('#btnSearch').keyup(function () {
+            search_table($(this).val());
+        });
+        function search_table(value) {
+            $("#tblProduct tr").each(function () {
+                var found = 'false';
+                $(this).each(function () {
+                    if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                        found = 'true';
+                    }
+                });
+                if (found == 'true') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+            };
+    </script>
+}
+
+
+
+
+

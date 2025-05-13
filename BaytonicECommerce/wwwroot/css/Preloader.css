@@ -1,0 +1,81 @@
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18vw;
+  height: 18vw;
+}
+
+.loaderImg {
+  margin-top: 35%;
+  margin-left: 10%;
+  width: 79%;
+}
+
+.loader .dot {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 0.5vw);
+  width: .7vw;
+  height: .7vw;
+  border-radius: 50%;
+  background: #d26901;
+  transform-origin: 50% 9vw;
+  box-shadow: 0px 0px 1px 1px #d26901;
+}
+
+.loader.loading .dot:nth-child(1) {
+  animation: fullrotate 2.75s 0s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(2) {
+  animation: fullrotate 2.5s 0.25s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(3) {
+  animation: fullrotate 2.25s 0.5s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(4) {
+  animation: fullrotate 2s 0.75s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(5) {
+  animation: fullrotate 1.75s 1s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(6) {
+  animation: fullrotate 1.5s 1.25s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(7) {
+  animation: fullrotate 1.25s 1.5s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(8) {
+  animation: fullrotate 1s 1.75s infinite;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.3, 1);
+}
+
+.loader.loading .dot:nth-child(1) {
+  animation: fullrotate 2.5s 0s infinite;
+  animation-timing-function: cubic-bezier(0.8, 0, 0.3, 1);
+}
+
+@keyframes fullrotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

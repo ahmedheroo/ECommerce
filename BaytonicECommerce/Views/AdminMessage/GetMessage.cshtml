@@ -1,0 +1,88 @@
+﻿@inject EcommerceContext context
+@model Message
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h5 style="color:gray">Message</h5>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="SysMessage">Messages</a></li>
+                        <li class="breadcrumb-item active">View</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="card card-info" style="margin:20px">
+        <div class="card-header">
+            <h3 class="card-title">Message Details</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal" >
+            <div class="card-body">
+                <div class="form-group row">
+                    <label asp-for="SenderName" class="col-sm-2 col-form-label"> Sender Name</label>
+                    <div class="col-sm-10">
+                        <input asp-for="SenderName" class="form-control" placeholder="Message sender full name" readonly>
+                    </div>
+                    <span asp-validation-for="SenderName" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Email" class="col-sm-2 col-form-label"> Email</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Email" class="form-control" placeholder="Sender Email" readonly>
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Date" class="col-sm-2 col-form-label">Date and time </label>
+                    <div class="col-sm-10">
+                        <input asp-for="Date" type="datetime-local" class="form-control" readonly>
+                    </div>
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Subject" class="col-sm-2 col-form-label"> Subject</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Subject" class="form-control"  placeholder="Subject" readonly>
+                    </div>
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Message1" class="col-sm-2 col-form-label">Message</label>
+                    <div class="col-sm-10">
+                        <textarea asp-for="Message1" rows="5" class="form-control"  readonly>
+                  </textarea>
+                    </div>
+                    <span asp-validation-for="Message1" class="text-danger"></span>
+                </div>
+                @*<div class="form-group row">
+                    <label asp-for="SeenByUserId" class="col-sm-2 col-form-label"> Seen By</label>
+                    <div class="col-sm-10">
+                        <input asp-for="SeenByUserId" class="form-control"  value="@context.ApplicationUsers.Where(x=>x.UserId==Model.SeenByUserId).Select(x=>x.FullName).FirstOrDefault()" readonly>
+                    </div>
+                    <span asp-validation-for="SeenByUserId" class="text-danger"></span>
+                </div>*@
+            </div>
+
+
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <a asp-action="Index" asp-controller="AdminMessage" class="btn btn-secondary float-right">Back</a>
+            </div>
+
+            <!-- /.card-footer -->
+        </form>
+    </div>
+</div>
+

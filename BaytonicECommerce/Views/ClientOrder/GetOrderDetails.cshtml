@@ -1,0 +1,191 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Resource> T
+@model OrderProductsVM
+@{
+    ViewData["Title"] = "GetOrderById";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div id="wrapper" class="wrapper-fluid banners-effect-5">
+
+
+
+
+    <!-- Main Container  -->
+    <div class="main-container container">
+        <ul class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">@T["OrderInfomation"]</a></li>
+        </ul>
+
+        <div class="row">
+            <!--Middle Part Start-->
+            <div id="content" class="col-sm-12">
+                <h2 class="title">@T["OrderInfomation"]</h2>
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td colspan="2" class="text-left">@T["OrderDetails"]</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 50%;" class="text-left">
+                                <b>@T["OrderID:"]</b> @Model.order.Id
+                                <br>
+                                <b>@T["DateAdded:"]</b> @Model.order.OrderDate.ToShortDateString()
+                            </td>
+                            <td style="width: 50%;" class="text-left">
+                                <b>@T["PaymentMethod:"]</b> @T["CashOnDelivery"]
+                                <br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>@T["OrderStatues"]</h3>
+
+                <div class="track">
+                    @if (Model.order.Status == "Deliverd")
+                    {<div class="step active"> <span class="icon"> <i class="fa fa-archive fa-lg"></i> </span> <span class="text">Order processing</span> </div>
+                        <div class="step active"> <span class="icon"> <i class="fa fa-user fa-lg"></i> </span> <span class="text"> Picked by courier</span> </div>
+                        <div class="step active"> <span class="icon"> <i class="fa fa-truck fa-lg"></i> </span> <span class="text"> On the way </span> </div>
+                        <div class="step active"> <span class="icon"> <i class="fa fa-check fa-lg"></i> </span> <span class="text">Ready for pickup</span> </div>
+                    }
+                    else if (Model.order.Status == "PickedByCourier")
+                    {<div class="step active"> <span class="icon"> <i class="fa fa-archive fa-lg"></i> </span> <span class="text">Order processing</span> </div>
+                        <div class="step active"> <span class="icon"> <i class="fa fa-user fa-lg"></i> </span> <span class="text"> Picked by courier</span> </div>
+                        <div class="step "> <span class="icon"> <i class="fa fa-truck fa-lg"></i> </span> <span class="text"> On the way </span> </div>
+                        <div class="step "> <span class="icon"> <i class="fa fa-check fa-lg"></i> </span> <span class="text">Ready for pickup</span> </div>
+                    }
+                    else if (Model.order.Status == "OnTheWay")
+                    {<div class="step active"> <span class="icon"> <i class="fa fa-archive fa-lg"></i> </span> <span class="text">Order processing</span> </div>
+                        <div class="step active"> <span class="icon"> <i class="fa fa-user fa-lg"></i> </span> <span class="text"> Picked by courier</span> </div>
+                        <div class="step active"> <span class="icon"> <i class="fa fa-truck fa-lg"></i> </span> <span class="text"> On the way </span> </div>
+                        <div class="step "> <span class="icon"> <i class="fa fa-check fa-lg"></i> </span> <span class="text">Ready for pickup</span> </div>
+                    }
+                    else
+                    {<div class="step active"> <span class="icon"> <i class="fa fa-archive fa-lg"></i> </span> <span class="text">Order processing</span> </div>
+                        <div class="step "> <span class="icon"> <i class="fa fa-user fa-lg"></i> </span> <span class="text"> Picked by courier</span> </div>
+                        <div class="step "> <span class="icon"> <i class="fa fa-truck fa-lg"></i> </span> <span class="text"> On the way </span> </div>
+                        <div class="step "> <span class="icon"> <i class="fa fa-check fa-lg"></i> </span> <span class="text">Ready for pickup</span> </div>
+                    }
+                </div>
+                <hr>
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td style="width: 50%; vertical-align: top;" class="text-left ">@T["DeliveryAddress"]</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-left">
+                                @Model.order.UserId
+                                <br>Egypt
+                                <br>@Model.order.GovShipping.Name
+                                <br>@Model.order.DetailedAddress
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td class="text-left">@T["ProductImage"]</td>
+                                <td class="text-left">@T["productName"]</td>
+                                <td class="text-right">@T["Quantity"]</td>
+                                <td class="text-right">@T["UnitPrice"]</td>
+                                <td class="text-right">@T["Total"]</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.orderProducts)
+                            {
+                                <tr>
+                                    <td class="text-left"><img hight="70px" width="70px" src="@Url.Content(item.Product.FirstImgUrl)" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-thumbnail" /> </td>
+
+                                    <td class="text-left">@item.Product.NameE</td>
+                                    <td class="text-right">@item.Quantity</td>
+                                    <td class="text-right">@item.UnitPrice</td>
+                                    <td class="text-right">@item.SubTotal</td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right">
+                                    <b>@T["Sub-Total"]</b>
+                                </td>
+                                <td class="text-right">@(Model.order.TotalPrice - Model.order.GovShipping.ShippingPrice) @T["EGP"] </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right">
+                                    <b>@T["FlatShippingRate"]</b>
+                                </td>
+                                <td class="text-right">@Model.order.GovShipping.ShippingPrice @T["EGP"]</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right">
+                                    <b>@T["Discount"]</b>
+                                </td>
+                                <td class="text-right">@Model.order.DicountValue @T["EGP"]</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right">
+                                    <b>@T["VAT(20%)"]</b>
+                                </td>
+                                <td class="text-right">00.00 @T["EGP"]</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right">
+                                    <b>@T["Total"]</b>
+                                </td>
+                                <td class="text-right">@(Model.order.TotalPrice - Model.order.DicountValue) @T["EGP"]</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="buttons clearfix">
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-yellow" href="#">@T["Continue"]</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!--Middle Part End-->
+            <!--Right Part Start -->
+            <!--Right Part End -->
+        </div>
+    </div>
+    <!-- //Main Container -->
+
+
+</div>
+
+
+<!-- Include Libs & Plugins
+    ============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
